@@ -8,7 +8,10 @@ var res = {
     Runner_png : "res/runner.png",
     Cloud_png : "res/cloud.png",
     Step2_png : "res/two_step.png",
-    Step3_png : "res/three_step.png"
+    Step3_png : "res/three_step.png",
+    Bomb_png : "res/bomb.png",
+    Clock_png : "res/clock.png",
+    Explosion_png : "res/explosion.png"
 };
 
 var g_resources = [
@@ -22,7 +25,10 @@ var g_resources = [
     res.Runner_png,
     res.Cloud_png,
     res.Step2_png,
-    res.Step3_png
+    res.Step3_png,
+    res.Bomb_png,
+    res.Clock_png,
+    res.Explosion_png
 
     //plist
 
