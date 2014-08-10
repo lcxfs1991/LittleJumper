@@ -8,7 +8,7 @@ var StatusLayer = cc.Layer.extend({
     labelLevel:null,
     labelMeter:null,
     _labelNumber:null,
-    _number:0.0,
+    number:0.0,
     _updateRate:0.1,
     _level:null,
 
@@ -40,9 +40,9 @@ var StatusLayer = cc.Layer.extend({
         this.labelLevel.setPosition(cc.p(110, winsize.height - 15));
         this.addChild(this.labelLevel);
 
-        _number = 0.0;
+        this.number = 0.0;
 
-        var labelName = ""+_number;
+        var labelName = ""+this.number;
         _labelNumber = cc.LabelTTF.create(labelName, "Arial", 32);
 //        _labelNumber.setColor(cc.c3(64, 64, 64));
         _labelNumber.setPosition(cc.p(winsize.width - 70, winsize.height - 15));
@@ -91,18 +91,18 @@ var StatusLayer = cc.Layer.extend({
     },
 
     cutSecond:function(){
-        _number -= 2.0;
+        this.number -= 2.0;
 
-        if (_number < 0){
-            _number = 0 ;
+        if (this.number < 0){
+            this.number = 0 ;
         }
     },
 
     updateNumber:function() {
-        _number += _updateRate;
+        this.number += _updateRate;
 
         if(_labelNumber == null) return;
 
-        _labelNumber.setString(""+Math.round(_number*100)/100+" 秒");
+        _labelNumber.setString(""+Math.round(this.number*100)/100+" 秒");
     }
 });

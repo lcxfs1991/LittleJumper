@@ -4,11 +4,11 @@
 
 var GameResultLayer = cc.Layer.extend({
 
-    ctor:function (gameJudge) {
+    ctor:function (gameJudge, result) {
         this._super();
-        this.init(gameJudge);
+        this.init(gameJudge, result);
     },
-    init:function (gameJudge) {
+    init:function (gameJudge, result) {
         this._super();
         cc.log("gameJudge = "+gameJudge);
         var winsize = cc.director.getWinSize();
@@ -31,11 +31,17 @@ var GameResultLayer = cc.Layer.extend({
             var Msg = "虽失败，莫气馁!";
         }
 
-
         var MsgLabel = cc.LabelTTF.create(Msg, "Arial", 32);
         MsgLabel.setColor(cc.color(255, 255, 255));
         MsgLabel.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 80));
         this.addChild(MsgLabel);
+
+        cc.log("second "+result);
+        var TimeResult = cc.LabelTTF.create("你的速度是 "+Math.round(result*100)/100+" 秒", "Arial", 32);
+        TimeResult.setColor(cc.color(255, 255, 255));
+        TimeResult.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 160));
+        this.addChild(TimeResult);
+
     },
 
     onRestart:function(){

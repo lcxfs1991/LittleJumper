@@ -97,7 +97,8 @@ var StepThree = cc.Sprite.extend({
             this.status.cutSecond();
         }
 
-        if (currentStep + 7 >= 28){
+        // +7 because there is 7 empty clouds at initial stage
+        if (currentStep + 7 >= 29){
             this.gameJudge = "Success";
             cc.log(this.gameJudge);
             this.runAction(cc.Sequence.create(
@@ -118,7 +119,7 @@ var StepThree = cc.Sprite.extend({
 
     onGameOver:function(){
         var scene = cc.Scene.create();
-        scene.addChild(new GameResultLayer(this.gameJudge));
+        scene.addChild(new GameResultLayer(this.gameJudge, this.status.number));
         cc.director.runScene(cc.TransitionFade.create(1.2, scene));
     }
 
