@@ -5,6 +5,8 @@ var res = {
     JumpBG_png : "res/Bg.png",
     StartBtn_png : "res/start.png",
     StartBtnDone_png : "res/start_done.png",
+    ReStartBtn_png : "res/restart.png",
+    ReStartBtnDone_png : "res/restart_done.png",
     Runner_png : "res/runner.png",
     Cloud_png : "res/cloud.png",
     Step2_png : "res/two_step.png",

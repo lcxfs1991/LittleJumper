@@ -7,11 +7,14 @@ var StepTwo = cc.Sprite.extend({
     button:null,
     player:null,
     cloud:null,
+    status:null,
+    gameJudge:"Normal",
 
     ctor:function(player, cloud, setting){
 
         this.player = player;
         this.cloud = cloud;
+        this.status = setting;
         this._super();
         this.init();
 
@@ -80,8 +83,40 @@ var StepTwo = cc.Sprite.extend({
 
     playerJump:function(){
         this.cloud.moveCloud(1);
-        this.player.jump();
 
+        var currentStep = this.status.updateLevel(1);
+
+        this.gameJudge = this.cloud.checkEffect(currentStep);
+
+        this.player.jump(this.gameJudge);
+
+        if (this.gameJudge == "Clock"){
+            this.status.cutSecond();
+        }
+
+        if (currentStep + 7 >= 28){
+            this.gameJudge = "Success";
+            cc.log(this.gameJudge);
+            this.runAction(cc.Sequence.create(
+                cc.DelayTime.create(0.2),
+                cc.CallFunc.create(this.onGameOver, this)));
+        }
+
+        cc.log("current step: "+(currentStep + 7));
+//        cc.log("current cloud: "+this.cloud.cloudArray[currentStep + 7].display);
+
+        if (this.gameJudge == "NoCloud" || this.gameJudge == "Explode"){
+            this.runAction(cc.Sequence.create(
+                cc.DelayTime.create(0.2),
+                cc.CallFunc.create(this.onGameOver, this)));
+        }
+
+    },
+
+    onGameOver:function(){
+        var scene = cc.Scene.create();
+        scene.addChild(new GameResultLayer(this.gameJudge));
+        cc.director.runScene(cc.TransitionFade.create(1.2, scene));
     }
 
 });

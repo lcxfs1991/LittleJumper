@@ -20,6 +20,7 @@
         "src/CloudLayer.js",
         "src/StepTwo.js",
         "src/StepThree.js",
-        "src/SimpleTouch.js"
+        "src/SimpleTouch.js",
+        "src/GameResultLayer.js"
     ]
 }

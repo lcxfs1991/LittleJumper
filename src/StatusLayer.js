@@ -51,7 +51,51 @@ var StatusLayer = cc.Layer.extend({
 
         this.addChild(_labelNumber);
 
-//        this.schedule(this.updateNumber, _updateRate);
+        this.schedule(this.updateNumber, _updateRate);
+    },
+
+    updateLevel:function(num){
+
+        this.currentStep += num;
+
+        if (this.currentStep < 2){
+            this.currentLevel = _level[0];
+        }
+        else if (this.currentStep >= 2 && this.currentStep < 5)
+        {
+            this.currentLevel = _level[1];
+        }
+        else if (this.currentStep >= 5 && this.currentStep < 10)
+        {
+            this.currentLevel = _level[2];
+        }
+        else if (this.currentStep >= 10 && this.currentStep < 15)
+        {
+            this.currentLevel = _level[2];
+        }
+        else if (this.currentStep >= 15 && this.currentStep < 30)
+        {
+            this.currentLevel = _level[3];
+        }
+        else if (this.currentStep >= 30)
+        {
+            this.currentLevel = _level[4];
+        }
+
+        this.removeChild(this.labelLevel);
+        this.labelLevel.setString("Level: "+this.currentLevel);
+        this.addChild(this.labelLevel);
+
+        return this.currentStep;
+
+    },
+
+    cutSecond:function(){
+        _number -= 2.0;
+
+        if (_number < 0){
+            _number = 0 ;
+        }
     },
 
     updateNumber:function() {

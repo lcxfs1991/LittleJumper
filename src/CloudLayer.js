@@ -13,15 +13,14 @@ var CloudLayer = cc.Layer.extend({
     startPos: -30,
     numOfcloud:17,
     upperBound:17,
-    cloudLimit: 300,
+    cloudLimit: 30,
+    cloudHidden: 10,
     speed:0.3,
     cloudArray:null,
     cloudSetting:null,
     toolSetting:null,
     pointToSetting:17,
     toolArray:null,
-    toolRange: 20,
-    clockQuota: 10,
 
     ctor:function () {
 
@@ -47,12 +46,13 @@ var CloudLayer = cc.Layer.extend({
 
     genCloud:function(){
 
+        cc.log("gen_cloud");
 
         this.cloudSetting = new Array(this.cloudLimit);
         this.toolSetting = new Array(this.cloudLimit);
 
         //initialization clouds
-        for (var i = 0; i <this.cloudLimit; i++ ){
+        for (var i = 0; i < this.cloudLimit + this.cloudHidden; i++ ){
             this.cloudSetting[i] = 1;
         }
 
@@ -64,11 +64,17 @@ var CloudLayer = cc.Layer.extend({
         this.cloudSetting[8] = 0;
         this.cloudSetting[12] = 0;
 
-        for (var i = this.numOfcloud; i <this.cloudLimit; i++ ){
+        for (var i = this.numOfcloud; i < this.cloudLimit + this.cloudHidden; i++ ){
 
             if (Math.random() < 0.5 && this.cloudSetting[i - 1] !=0){
                 this.cloudSetting[i] = 0;
             }
+        }
+
+        this.cloudSetting[this.cloudLimit] = 0;
+
+        for (var i = this.cloudLimit + 1; i < this.cloudLimit + this.cloudHidden; i++){
+            this.cloudSetting[i] = 0;
         }
 
         //initialization of tools
@@ -85,7 +91,7 @@ var CloudLayer = cc.Layer.extend({
 
                 var loc = Math.floor(Math.random() * (max - min + 1)) + min;
 
-                if (this.cloudSetting[loc] == 1)
+                if (loc != 7 && this.cloudSetting[loc] == 1)
                 {
                     this.toolSetting[loc] = 2;
                     break;
@@ -106,7 +112,7 @@ var CloudLayer = cc.Layer.extend({
                 if (this.cloudSetting[loc] == 1 && this.toolSetting[loc] == 0 && this.cloudSetting[loc - 1] != undefined
                     && this.cloudSetting[loc - 1] ==1 && this.cloudSetting[loc + 1] != undefined
                     && this.cloudSetting[loc + 1] == 1){
-                    
+
                     this.toolSetting[loc] = 1;
                     break;
                 }
@@ -201,19 +207,91 @@ var CloudLayer = cc.Layer.extend({
 
         //add cloud
         for (var i = 0; i < num; i++){
-            var item = new CloudItem();
-            this.cloudArray.push(item);
-            this.cloudArray[this.numOfcloud - (num - i)].display = this.cloudSetting[this.pointToSetting];
-            this.addChild(this.cloudArray[this.numOfcloud - (num - i)].createCloud(this.startPos, this.distance * (this.upperBound - (num - i)), this.numOfcloud + i));
+            if (this.cloudSetting[this.pointToSetting] != undefined){
+                var item = new CloudItem();
+                this.cloudArray.push(item);
+                this.cloudArray[this.numOfcloud - (num - i)].display = this.cloudSetting[this.pointToSetting];
+                cc.log("cloud setting = "+this.cloudSetting[this.pointToSetting]);
+                cc.log("pointToSetting : "+this.pointToSetting);
+                this.addChild(this.cloudArray[this.numOfcloud - (num - i)].createCloud(this.startPos, this.distance * (this.upperBound - (num - i)), this.numOfcloud + i));
 
-            var tool = new ToolItem();
-            this.toolArray.push(tool);
-            this.toolArray[this.numOfcloud - (num - i)].toolType = this.toolSetting[this.pointToSetting];
-            this.addChild(this.toolArray[this.numOfcloud - (num - i)].createTool(this.startPos, this.distance * (this.upperBound - (num - i))));
+                var tool = new ToolItem();
+                this.toolArray.push(tool);
+                this.toolArray[this.numOfcloud - (num - i)].toolType = this.toolSetting[this.pointToSetting];
+                this.addChild(this.toolArray[this.numOfcloud - (num - i)].createTool(this.startPos, this.distance * (this.upperBound - (num - i))));
 
-            this.pointToSetting++;
+                this.pointToSetting++;
+            }
         }
 
+
+    },
+
+    checkEffect:function(currentStep){
+
+        // 7  is the index  at the center
+        if (this.toolArray[7] != undefined){
+
+            var fadeAni = cc.fadeOut(0.1);
+
+            if (this.toolArray[7].toolType == 1){
+                this.toolArray[7].runAction(fadeAni);
+
+                var explode = cc.Sprite.create(res.Explosion_png);
+                var pos = this.toolArray[7].getPosition();
+                explode.setPosition(cc.p(this.toolArray[7].getPosition().x - this.distance - 25, this.toolArray[7].getPosition().y));
+                explode.setScale(0);
+
+                var explodeAni = cc.sequence(
+                    cc.rotateTo(0.1, 180),
+                    cc.scaleTo(0.1, 0.8)
+                );
+
+                explode.runAction(explodeAni);
+                this.addChild(explode);
+
+                var explodeAniRev = cc.sequence(
+                    cc.rotateTo(0.2, 180),
+                    cc.scaleTo(0.2, 0)
+                );
+
+                explode.runAction(explodeAniRev);
+
+                this.cloudArray[7].visible = false;
+
+//                var fallAni = cc.moveBy(2,cc.p(0,-400)).easing(cc.easeIn(0.5));
+//                runner.runAction(fallAni);
+
+                return "Explode";
+
+
+            }
+            else if (this.toolArray[7].toolType == 2){
+                this.toolArray[7].runAction(fadeAni);
+
+                var cutSecond = cc.LabelTTF.create("减2秒", "Helvetica", 32);
+                cutSecond.setColor(cc.color(240,43,79)); //red
+                cutSecond.setPosition(cc.p(this.toolArray[7].getPosition().x - this.distance - 20, this.toolArray[7].getPosition().y + 40));
+
+                var shrinkAni = cc.sequence(
+                  cc.moveBy(0.6, 0, 80),
+                  cc.fadeOut(1.5)
+
+                );
+
+                cutSecond.runAction(shrinkAni);
+
+                this.addChild(cutSecond);
+
+                return "Clock";
+            }
+        }
+
+        if (this.cloudArray[7].display != undefined && this.cloudArray[7].display == 0){
+                return "NoCloud";
+        }
+
+        return "Normal";
 
     }
 
