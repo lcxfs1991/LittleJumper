@@ -21,6 +21,7 @@ var CloudLayer = cc.Layer.extend({
     pointToSetting:17,
     toolArray:null,
     toolRange: 20,
+    clockQuota: 10,
 
     ctor:function () {
 
@@ -71,14 +72,51 @@ var CloudLayer = cc.Layer.extend({
         }
 
         //initialization of tools
-//        for (var i = 0; i < this.cloudLimit; i++){
-//            this.toolSetting[i] = 0;
-//        }
-
         for (var i = 0; i < this.cloudLimit; i++){
-
-            this.toolSetting[i] = 1;
+            this.toolSetting[i] = 0;
         }
+
+        //random tools
+        for (var i = 0; i < this.cloudLimit / 15; i++){
+
+            var min = (0 + i * 15);
+            var max = (14 + i * 15);
+            while(1){
+
+                var loc = Math.floor(Math.random() * (max - min + 1)) + min;
+
+                if (this.cloudSetting[loc] == 1)
+                {
+                    this.toolSetting[loc] = 2;
+                    break;
+                }
+            }
+        }
+
+        for (var i = 0; i < this.cloudLimit / 30; i++){
+
+            var start = (0 + i * 30) ;
+            var end = (29 + i * 30);
+            var repeat = 10;
+
+            while(repeat > 0){
+
+                var loc = Math.floor(Math.random() * (end - start + 1)) + start;
+
+                if (this.cloudSetting[loc] == 1 && this.toolSetting[loc] == 0 && this.cloudSetting[loc - 1] != undefined
+                    && this.cloudSetting[loc - 1] ==1 && this.cloudSetting[loc + 1] != undefined
+                    && this.cloudSetting[loc + 1] == 1){
+                    
+                    this.toolSetting[loc] = 1;
+                    break;
+                }
+
+                repeat--;
+            }
+
+        }
+
+
 
 
     },
@@ -198,7 +236,7 @@ var CloudItem = cc.Sprite.extend({
         this.index = index;
 
         if (this.display == 1){
-//            cc.log(startPos + distance);
+
             this.initWithFile(res.Cloud_png);
             this.attr({
                 x: startPos + distance,
@@ -237,7 +275,13 @@ var ToolItem = cc.Sprite.extend({
 
         if (this.toolType > 0){
 
-            this.initWithFile(res.Bomb_png);
+            if (this.toolType == 1){
+                this.initWithFile(res.Bomb_png);
+            }
+            else if (this.toolType == 2){
+                this.initWithFile(res.Clock_png);
+            }
+
 
             this.attr({
                 x: startPos + distance,
