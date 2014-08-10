@@ -14,7 +14,7 @@ var CloudLayer = cc.Layer.extend({
     numOfcloud:17,
     upperBound:17,
     cloudLimit: 30,
-    cloudHidden: 10,
+    cloudHidden: 9,
     speed:0.3,
     cloudArray:null,
     cloudSetting:null,
@@ -71,7 +71,8 @@ var CloudLayer = cc.Layer.extend({
             }
         }
 
-        this.cloudSetting[this.cloudLimit] = 0;
+        //last cloud display / win point
+        this.cloudSetting[this.cloudLimit - 1] = 1;
 
         for (var i = this.cloudLimit + 1; i < this.cloudLimit + this.cloudHidden; i++){
             this.cloudSetting[i] = 0;
@@ -121,6 +122,9 @@ var CloudLayer = cc.Layer.extend({
             }
 
         }
+
+        //destination tab
+        this.toolSetting[this.cloudLimit - 1] = 3;
 
 
 
@@ -358,6 +362,9 @@ var ToolItem = cc.Sprite.extend({
             }
             else if (this.toolType == 2){
                 this.initWithFile(res.Clock_png);
+            }
+            else if (this.toolType == 3){
+                this.initWithFile(res.Win_png);
             }
 
 

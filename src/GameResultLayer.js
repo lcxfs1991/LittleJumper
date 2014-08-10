@@ -3,13 +3,14 @@
  */
 
 var GameResultLayer = cc.Layer.extend({
-    ctor:function () {
+
+    ctor:function (gameJudge) {
         this._super();
-        this.init();
+        this.init(gameJudge);
     },
     init:function (gameJudge) {
         this._super();
-
+        cc.log("gameJudge = "+gameJudge);
         var winsize = cc.director.getWinSize();
 
         var centerPos = cc.p(winsize.width / 2, winsize.height / 2);

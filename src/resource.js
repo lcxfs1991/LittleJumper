@@ -13,7 +13,8 @@ var res = {
     Step3_png : "res/three_step.png",
     Bomb_png : "res/bomb.png",
     Clock_png : "res/clock.png",
-    Explosion_png : "res/explosion.png"
+    Explosion_png : "res/explosion.png",
+    Win_png : "res/win.png"
 };
 
 var g_resources = [
@@ -30,7 +31,8 @@ var g_resources = [
     res.Step3_png,
     res.Bomb_png,
     res.Clock_png,
-    res.Explosion_png
+    res.Explosion_png,
+    res.Win_png
 
     //plist
 
