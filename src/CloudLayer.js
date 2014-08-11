@@ -9,7 +9,7 @@
 //cloud layer
 var CloudLayer = cc.Layer.extend({
 
-    distance:90,
+    distance:180,
     startPos: -30,
     numOfcloud:17,
     upperBound:17,
@@ -21,6 +21,7 @@ var CloudLayer = cc.Layer.extend({
     toolSetting:null,
     pointToSetting:17,
     toolArray:null,
+    centerIndex: 2,
 
     ctor:function () {
 
@@ -57,7 +58,7 @@ var CloudLayer = cc.Layer.extend({
         }
 
         //initial condition
-        for (var i = 0; i < 7; i++){
+        for (var i = 0; i < this.centerIndex; i++){
             this.cloudSetting[i] = 0;
         }
 
@@ -92,7 +93,7 @@ var CloudLayer = cc.Layer.extend({
 
                 var loc = Math.floor(Math.random() * (max - min + 1)) + min;
 
-                if (loc != 7 && this.cloudSetting[loc] == 1)
+                if (loc != this.centerIndex && this.cloudSetting[loc] == 1)
                 {
                     this.toolSetting[loc] = 2;
                     break;
@@ -234,16 +235,16 @@ var CloudLayer = cc.Layer.extend({
     checkEffect:function(currentStep){
 
         // 7  is the index  at the center
-        if (this.toolArray[7] != undefined){
+        if (this.toolArray[this.centerIndex] != undefined){
 
             var fadeAni = cc.fadeOut(0.1);
 
-            if (this.toolArray[7].toolType == 1){
-                this.toolArray[7].runAction(fadeAni);
+            if (this.toolArray[this.centerIndex].toolType == 1){
+                this.toolArray[this.centerIndex].runAction(fadeAni);
 
                 var explode = cc.Sprite.create(res.Explosion_png);
-                var pos = this.toolArray[7].getPosition();
-                explode.setPosition(cc.p(this.toolArray[7].getPosition().x - this.distance - 25, this.toolArray[7].getPosition().y));
+                var pos = this.toolArray[this.centerIndex].getPosition();
+                explode.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x - this.distance - 80, this.toolArray[this.centerIndex].getPosition().y));
                 explode.setScale(0);
 
                 var explodeAni = cc.sequence(
@@ -261,7 +262,7 @@ var CloudLayer = cc.Layer.extend({
 
                 explode.runAction(explodeAniRev);
 
-                this.cloudArray[7].visible = false;
+                this.cloudArray[this.centerIndex].visible = false;
 
 //                var fallAni = cc.moveBy(2,cc.p(0,-400)).easing(cc.easeIn(0.5));
 //                runner.runAction(fallAni);
@@ -270,12 +271,12 @@ var CloudLayer = cc.Layer.extend({
 
 
             }
-            else if (this.toolArray[7].toolType == 2){
-                this.toolArray[7].runAction(fadeAni);
+            else if (this.toolArray[this.centerIndex].toolType == 2){
+                this.toolArray[this.centerIndex].runAction(fadeAni);
 
                 var cutSecond = cc.LabelTTF.create("减2秒", "Helvetica", 32);
                 cutSecond.setColor(cc.color(240,43,79)); //red
-                cutSecond.setPosition(cc.p(this.toolArray[7].getPosition().x - this.distance - 20, this.toolArray[7].getPosition().y + 40));
+                cutSecond.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x - this.distance - 20, this.toolArray[this.centerIndex].getPosition().y + 40));
 
                 var shrinkAni = cc.sequence(
                   cc.moveBy(0.6, 0, 80),
@@ -291,7 +292,7 @@ var CloudLayer = cc.Layer.extend({
             }
         }
 
-        if (this.cloudArray[7].display != undefined && this.cloudArray[7].display == 0){
+        if (this.cloudArray[this.centerIndex].display != undefined && this.cloudArray[this.centerIndex].display == 0){
                 return "NoCloud";
         }
 
@@ -305,7 +306,7 @@ var CloudLayer = cc.Layer.extend({
 var CloudItem = cc.Sprite.extend({
 
     display: 1,
-    moveDistance:90,
+    moveDistance:180,
     index: 0,
 
     ctor:function(){
@@ -322,8 +323,8 @@ var CloudItem = cc.Sprite.extend({
             this.initWithFile(res.Cloud_png);
             this.attr({
                 x: startPos + distance,
-                y: 300,
-                scale: 0.5
+                y: 700,
+                scale: 1
             });
 
         }
@@ -345,7 +346,7 @@ var CloudItem = cc.Sprite.extend({
 //Tool
 var ToolItem = cc.Sprite.extend({
 
-    moveDistance: 90,
+    moveDistance: 180,
     toolType: 0,
 
     ctor:function(){
@@ -370,8 +371,8 @@ var ToolItem = cc.Sprite.extend({
 
             this.attr({
                 x: startPos + distance,
-                y: 330,
-                scale: 0.2
+                y: 750,
+                scale: 0.5
             });
 
         }

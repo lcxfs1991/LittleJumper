@@ -13,7 +13,7 @@ var AnimationLayer = cc.Layer.extend({
 
         //create the hero sprite
         var spriteRunner = cc.Sprite.create(res.Runner_png);
-        spriteRunner.attr({x: 600, y: 350, scale:0.5});
+        spriteRunner.attr({x: 340, y: 810, scale: 1});
 
         //create the move action
         var actionTo = cc.MoveTo.create(2, cc.p(300, 350));

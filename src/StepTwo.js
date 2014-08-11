@@ -9,6 +9,7 @@ var StepTwo = cc.Sprite.extend({
     cloud:null,
     status:null,
     gameJudge:"Normal",
+    centerIndex: 2,
 
     ctor:function(player, cloud, setting){
 
@@ -24,9 +25,9 @@ var StepTwo = cc.Sprite.extend({
 
         this.initWithFile(res.Step2_png);
         this.attr({
-            x: 60,
-            y: 60,
-            scale: 0.5
+            x: 120,
+            y: 100,
+            scale: 1
         });
 
         //Create a "one by one" touch event listener (processes one touch at a time)
@@ -95,7 +96,7 @@ var StepTwo = cc.Sprite.extend({
         }
 
         // +7 because there is 7 empty clouds at initial stage
-        if (currentStep + 7 >= 29){
+        if (currentStep + this.centerIndex >= 29){
             this.gameJudge = "Success";
             cc.log(this.gameJudge);
             this.runAction(cc.Sequence.create(
@@ -103,7 +104,7 @@ var StepTwo = cc.Sprite.extend({
                 cc.CallFunc.create(this.onGameOver, this)));
         }
 
-        cc.log("current step: "+(currentStep + 7));
+        cc.log("current step: "+(currentStep + this.centerIndex));
 //        cc.log("current cloud: "+this.cloud.cloudArray[currentStep + 7].display);
 
         if (this.gameJudge == "NoCloud" || this.gameJudge == "Explode"){
