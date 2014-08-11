@@ -54,7 +54,7 @@ var StatusLayer = cc.Layer.extend({
         this.schedule(this.updateNumber, _updateRate);
     },
 
-    updateLevel:function(num){
+    updateLevel:function(num, background){
 
         this.currentStep += num;
 
@@ -64,18 +64,22 @@ var StatusLayer = cc.Layer.extend({
         else if (this.currentStep >= 2 && this.currentStep < 5)
         {
             this.currentLevel = _level[1];
+            background.update(res.JumpBG1_png);
         }
         else if (this.currentStep >= 5 && this.currentStep < 10)
         {
             this.currentLevel = _level[2];
+            background.update(res.JumpBG2_png);
         }
         else if (this.currentStep >= 10 && this.currentStep < 15)
         {
             this.currentLevel = _level[2];
+            background.update(res.JumpBG3_png);
         }
         else if (this.currentStep >= 15 && this.currentStep < 30)
         {
             this.currentLevel = _level[3];
+            background.update(res.JumpBG4_png);
         }
         else if (this.currentStep >= 30)
         {

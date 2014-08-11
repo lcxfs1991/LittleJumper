@@ -8,14 +8,16 @@ var StepTwo = cc.Sprite.extend({
     player:null,
     cloud:null,
     status:null,
+    background:null,
     gameJudge:"Normal",
     centerIndex: 2,
 
-    ctor:function(player, cloud, setting){
+    ctor:function(player, cloud, setting, background){
 
         this.player = player;
         this.cloud = cloud;
         this.status = setting;
+        this.background = background;
         this._super();
         this.init();
 
@@ -85,7 +87,7 @@ var StepTwo = cc.Sprite.extend({
     playerJump:function(){
         this.cloud.moveCloud(1);
 
-        var currentStep = this.status.updateLevel(1);
+        var currentStep = this.status.updateLevel(1, this.background);
 
         this.gameJudge = this.cloud.checkEffect(currentStep);
 

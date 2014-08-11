@@ -44,11 +44,11 @@ var PlayScene = cc.Scene.extend({
         this.addChild(this.cloud);
 
         //add step two control
-        this.stepTwo = new StepTwo(this.player, this.cloud, this.status);
+        this.stepTwo = new StepTwo(this.player, this.cloud, this.status, this.background);
         this.addChild(this.stepTwo);
 
         //add step three control
-        this.stepThree = new StepThree(this.player, this.cloud, this.status);
+        this.stepThree = new StepThree(this.player, this.cloud, this.status, this.background);
         this.addChild(this.stepThree);
 
     }
