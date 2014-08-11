@@ -29,9 +29,9 @@ var StepThree = cc.Sprite.extend({
 
         this.initWithFile(res.Step3_png);
         this.attr({
-            x: 700,
-            y: 100,
-            scale: 1
+            x: 340,
+            y: 50,
+            scale: 0.5
         });
 
         //Create a "one by one" touch event listener (processes one touch at a time)

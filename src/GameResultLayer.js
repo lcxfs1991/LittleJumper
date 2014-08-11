@@ -47,13 +47,13 @@ var GameResultLayer = cc.Layer.extend({
             var Msg = "虽失败，莫气馁!";
         }
 
-        var MsgLabel = cc.LabelTTF.create(Msg, "Arial", 60);
+        var MsgLabel = cc.LabelTTF.create(Msg, "Arial", 32);
         MsgLabel.setColor(cc.color(255, 255, 255));
         MsgLabel.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 80));
         this.addChild(MsgLabel);
 
         cc.log("second "+result);
-        var TimeResult = cc.LabelTTF.create("你的速度是 "+Math.round(result*100)/100+" 秒", "Arial", 60);
+        var TimeResult = cc.LabelTTF.create("你的速度是 "+Math.round(result*100)/100+" 秒", "Arial", 32);
         TimeResult.setColor(cc.color(255, 255, 255));
         TimeResult.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 160));
         this.addChild(TimeResult);
@@ -65,7 +65,7 @@ var GameResultLayer = cc.Layer.extend({
     },
 
     onShare:function(){
-        document.title = "你的速度是 "+Math.round(this.secondResult * 100)/100+" 秒", "Arial", 60;
+        document.title = "你的速度是 "+Math.round(this.secondResult * 100)/100+" 秒", "Arial", 32;
     }
 });
 

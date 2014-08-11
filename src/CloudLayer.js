@@ -9,7 +9,7 @@
 //cloud layer
 var CloudLayer = cc.Layer.extend({
 
-    distance:180,
+    distance:90,
     startPos: -30,
     numOfcloud:17,
     upperBound:17,
@@ -244,7 +244,7 @@ var CloudLayer = cc.Layer.extend({
 
                 var explode = cc.Sprite.create(res.Explosion_png);
                 var pos = this.toolArray[this.centerIndex].getPosition();
-                explode.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x - this.distance - 80, this.toolArray[this.centerIndex].getPosition().y));
+                explode.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x - this.distance - 30, this.toolArray[this.centerIndex].getPosition().y));
                 explode.setScale(0);
 
                 var explodeAni = cc.sequence(
@@ -306,7 +306,7 @@ var CloudLayer = cc.Layer.extend({
 var CloudItem = cc.Sprite.extend({
 
     display: 1,
-    moveDistance:180,
+    moveDistance:90,
     index: 0,
 
     ctor:function(){
@@ -323,8 +323,8 @@ var CloudItem = cc.Sprite.extend({
             this.initWithFile(res.Cloud_png);
             this.attr({
                 x: startPos + distance,
-                y: 700,
-                scale: 1
+                y: 350,
+                scale: 0.5
             });
 
         }
@@ -346,7 +346,7 @@ var CloudItem = cc.Sprite.extend({
 //Tool
 var ToolItem = cc.Sprite.extend({
 
-    moveDistance: 180,
+    moveDistance: 90,
     toolType: 0,
 
     ctor:function(){
@@ -371,8 +371,8 @@ var ToolItem = cc.Sprite.extend({
 
             this.attr({
                 x: startPos + distance,
-                y: 750,
-                scale: 0.5
+                y: 370,
+                scale: 0.2
             });
 
         }
