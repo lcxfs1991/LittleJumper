@@ -13,7 +13,7 @@ var CloudLayer = cc.Layer.extend({
     startPos: -30,
     numOfcloud:17,
     upperBound:17,
-    cloudLimit: 30,
+    cloudLimit: 90,
     cloudHidden: 9,
     speed:0.3,
     cloudArray:null,
@@ -47,7 +47,7 @@ var CloudLayer = cc.Layer.extend({
 
     genCloud:function(){
 
-        cc.log("gen_cloud");
+//        cc.log("gen_cloud");
 
         this.cloudSetting = new Array(this.cloudLimit);
         this.toolSetting = new Array(this.cloudLimit);
@@ -232,7 +232,7 @@ var CloudLayer = cc.Layer.extend({
 
     },
 
-    checkEffect:function(currentStep){
+    checkEffect:function(player, currentStep){
 
         // 7  is the index  at the center
         if (this.toolArray[this.centerIndex] != undefined){
@@ -244,7 +244,8 @@ var CloudLayer = cc.Layer.extend({
 
                 var explode = cc.Sprite.create(res.Explosion_png);
                 var pos = this.toolArray[this.centerIndex].getPosition();
-                explode.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x - this.distance - 30, this.toolArray[this.centerIndex].getPosition().y));
+//                explode.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x - this.distance - 30, this.toolArray[this.centerIndex].getPosition().y));
+                explode.setPosition(cc.p(player.getPosition().x, this.toolArray[this.centerIndex].getPosition().y));
                 explode.setScale(0);
 
                 var explodeAni = cc.sequence(

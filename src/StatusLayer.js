@@ -58,26 +58,26 @@ var StatusLayer = cc.Layer.extend({
 
         this.currentStep += num;
 
-        if (this.currentStep < 2){
+        if (this.currentStep < 15){
             this.currentLevel = _level[0];
-        }
-        else if (this.currentStep >= 2 && this.currentStep < 5)
-        {
-            this.currentLevel = _level[1];
-        }
-        else if (this.currentStep >= 5 && this.currentStep < 10)
-        {
-            this.currentLevel = _level[2];
-        }
-        else if (this.currentStep >= 10 && this.currentStep < 15)
-        {
-            this.currentLevel = _level[2];
         }
         else if (this.currentStep >= 15 && this.currentStep < 30)
         {
+            this.currentLevel = _level[1];
+        }
+        else if (this.currentStep >= 30 && this.currentStep < 45)
+        {
+            this.currentLevel = _level[2];
+        }
+        else if (this.currentStep >= 45 && this.currentStep < 70)
+        {
+            this.currentLevel = _level[2];
+        }
+        else if (this.currentStep >= 70 && this.currentStep < 90)
+        {
             this.currentLevel = _level[3];
         }
-        else if (this.currentStep >= 30)
+        else if (this.currentStep >= 90)
         {
             this.currentLevel = _level[4];
         }

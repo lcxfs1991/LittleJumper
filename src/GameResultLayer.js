@@ -13,7 +13,7 @@ var GameResultLayer = cc.Layer.extend({
     },
     init:function (gameJudge, result) {
         this._super();
-        cc.log("gameJudge = "+gameJudge);
+//        cc.log("gameJudge = "+gameJudge);
         var winsize = cc.director.getWinSize();
 
         var centerPos = cc.p(winsize.width / 2, winsize.height / 2);
@@ -35,7 +35,7 @@ var GameResultLayer = cc.Layer.extend({
             this.onShare, this);
 
         var share = cc.Menu.create(this.ShareBtn);
-        share.setPosition(cc.p(winsize.width / 2, winsize.height / 2 - 200));
+        share.setPosition(cc.p(winsize.width / 2, winsize.height / 2 - 100));
         this.addChild(share);
 
 
@@ -52,7 +52,7 @@ var GameResultLayer = cc.Layer.extend({
         MsgLabel.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 80));
         this.addChild(MsgLabel);
 
-        cc.log("second "+result);
+//        cc.log("second "+result);
         var TimeResult = cc.LabelTTF.create("你的速度是 "+Math.round(result*100)/100+" 秒", "Arial", 32);
         TimeResult.setColor(cc.color(255, 255, 255));
         TimeResult.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 160));

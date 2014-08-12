@@ -4,6 +4,9 @@
 
 
 var AnimationLayer = cc.Layer.extend({
+
+    spriteRunner: null,
+
     ctor:function () {
         this._super();
         this.init();
@@ -12,13 +15,13 @@ var AnimationLayer = cc.Layer.extend({
         this._super();
 
         //create the hero sprite
-        var spriteRunner = cc.Sprite.create(res.Runner_png);
-        spriteRunner.attr({x: 155, y: 405, scale: 0.5});
+        this.spriteRunner = cc.Sprite.create(res.Runner_png);
+        this.spriteRunner.attr({x: 155, y: 405, scale: 0.5});
 
         //create the move action
         var actionTo = cc.MoveTo.create(2, cc.p(300, 350));
 //        spriteRunner.runAction(cc.Sequence.create(actionTo));
-        this.addChild(spriteRunner);
+        this.addChild(this.spriteRunner);
 
 //        this.jump();
     },

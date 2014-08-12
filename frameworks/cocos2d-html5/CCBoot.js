@@ -26,6 +26,7 @@
 var cc = cc || {};
 cc._tmp = cc._tmp || {};
 cc._LogInfos = {};
+loadingTxt.remove();
 
 /** @expose */
 window._p;

@@ -87,7 +87,7 @@ var StepTwo = cc.Sprite.extend({
 
         var currentStep = this.status.updateLevel(1);
 
-        this.gameJudge = this.cloud.checkEffect(currentStep);
+        this.gameJudge = this.cloud.checkEffect(this.player.spriteRunner, currentStep);
 
         this.player.jump(this.gameJudge);
 
@@ -96,7 +96,7 @@ var StepTwo = cc.Sprite.extend({
         }
 
         // +7 because there is 7 empty clouds at initial stage
-        if (currentStep + this.centerIndex >= 29){
+        if (currentStep + this.centerIndex >= 89){
             this.gameJudge = "Success";
             cc.log(this.gameJudge);
             this.runAction(cc.Sequence.create(

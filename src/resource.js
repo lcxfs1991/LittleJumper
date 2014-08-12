@@ -1,7 +1,4 @@
 var res = {
-//    HelloWorld_png : "res/HelloWorld.png",
-    CloseNormal_png : "res/CloseNormal.png",
-    CloseSelected_png : "res/CloseSelected.png",
     JumpBG_png : "res/Bg.png",
     StartBtn_png : "res/start.png",
     StartBtnDone_png : "res/start_done.png",
@@ -20,9 +17,6 @@ var res = {
 
 var g_resources = [
     //image
-//    res.HelloWorld_png,
-    res.CloseNormal_png,
-    res.CloseSelected_png,
     res.JumpBG_png,
     res.StartBtn_png,
     res.StartBtnDone_png,
