@@ -232,7 +232,7 @@ var CloudLayer = cc.Layer.extend({
 
     },
 
-    checkEffect:function(currentStep){
+    checkEffect:function(player, currentStep){
 
         // 7  is the index  at the center
         if (this.toolArray[this.centerIndex] != undefined){
@@ -244,7 +244,8 @@ var CloudLayer = cc.Layer.extend({
 
                 var explode = cc.Sprite.create(res.Explosion_png);
                 var pos = this.toolArray[this.centerIndex].getPosition();
-                explode.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x - this.distance - 30, this.toolArray[this.centerIndex].getPosition().y));
+//                explode.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x  - this.distance - 20, this.toolArray[this.centerIndex].getPosition().y));
+                explode.setPosition(cc.p(player.getPosition().x, this.toolArray[this.centerIndex].getPosition().y));
                 explode.setScale(0);
 
                 var explodeAni = cc.sequence(

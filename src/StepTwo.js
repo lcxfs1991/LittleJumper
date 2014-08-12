@@ -89,7 +89,7 @@ var StepTwo = cc.Sprite.extend({
 
         var currentStep = this.status.updateLevel(1, this.background);
 
-        this.gameJudge = this.cloud.checkEffect(currentStep);
+        this.gameJudge = this.cloud.checkEffect(this.player.spriteRunner , currentStep);
 
         this.player.jump(this.gameJudge);
 
