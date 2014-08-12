@@ -4,6 +4,10 @@ var MenuLayer = cc.Layer.extend({
     ctor : function(){
         //1. call super class's ctor function
         this._super();
+
+        //remove loading hint
+//        var loading = document.getElementById('loading');
+//        loading.remove();
     },
     init:function () {
         //////////////////////////////

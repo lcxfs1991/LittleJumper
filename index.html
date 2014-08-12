@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Cocos2d-html5 Hello World test</title>
+    <title>Little Jumper</title>
     <!--<link rel="icon" type="image/GIF" href="res/favicon.ico"/>-->
     <link rel="shortcut icon" href="http://p0.qhimg.com/d/inn/76f40f64/img/mao80.jpg" type="image/x-icon">
     <link rel="apple-touch-icon-precomposed" href="http://p0.qhimg.com/d/inn/76f40f64/img/mao80.jpg">
@@ -19,20 +19,21 @@
             -khtml-user-select: none;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
+
+        #loading{
+            color:white;
+            font-size: 32px;
+            text-align: center;
+        }
     </style>
 
 </head>
 <body style="padding:0; margin: 0; background: #000;">
-<canvas id="ld" width="800" height="100"></canvas>
+<div id="loading">
+    Loading, please wait...
+</div>
 <canvas id="gameCanvas" width="800" height="450"></canvas>
-<script>
-    var loadingTxt = document.getElementById('ld');
-    var ctx = loadingTxt.getContext('2d');
-
-    ctx.font = '32pt Calibri';
-    ctx.fillStyle = 'white';
-    ctx.fillText('Loading, Please wait...', 0, 80);
-</script>
+<img href="http://p0.qhimg.com/d/inn/76f40f64/img/mao80.jpg" style="display:hidden"/>
 </body>
 <script src="frameworks/cocos2d-html5/CCBoot.js"></script>
 <script src="main.js"></script>

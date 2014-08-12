@@ -59,10 +59,10 @@ var StepTwo = cc.Sprite.extend({
             //Trigger when moving touch
             onTouchMoved: function (touch, event) {
                 //Move the position of current button sprite
-                var target = event.getCurrentTarget();
-                var delta = touch.getDelta();
-                target.x += delta.x;
-                target.y += delta.y;
+//                var target = event.getCurrentTarget();
+//                var delta = touch.getDelta();
+//                target.x += delta.x;
+//                target.y += delta.y;
             },
             //Process the touch end event
             onTouchEnded: function (touch, event) {

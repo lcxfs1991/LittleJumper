@@ -324,8 +324,7 @@ var CloudItem = cc.Sprite.extend({
             this.initWithFile(res.Cloud_png);
             this.attr({
                 x: startPos + distance,
-                y: 350,
-                scale: 0.5
+                y: 350
             });
 
         }
@@ -372,8 +371,7 @@ var ToolItem = cc.Sprite.extend({
 
             this.attr({
                 x: startPos + distance,
-                y: 370,
-                scale: 0.2
+                y: 370
             });
 
         }

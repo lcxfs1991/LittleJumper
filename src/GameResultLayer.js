@@ -61,11 +61,51 @@ var GameResultLayer = cc.Layer.extend({
     },
 
     onRestart:function(){
+
+        document.title = "Little Jumper";
         cc.director.runScene(new PlayScene());
     },
 
     onShare:function(){
+
+        var winsize = cc.director.getWinSize();
+
         document.title = "你的速度是 "+Math.round(this.secondResult * 100)/100+" 秒", "Arial", 32;
+
+        var shareBG = cc.LayerColor.create(cc.color(0,0,0), 400, 600);
+        shareBG.setOpacity(200);
+        this.addChild(shareBG);
+
+        var shareMethod1 = cc.LabelTTF.create("点击右上角菜单", "Arial", 32);
+        shareMethod1.setColor(cc.color(255, 255, 255));
+        shareMethod1.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 40));
+        shareBG.addChild(shareMethod1);
+
+        var shareMethod1 = cc.LabelTTF.create("分享到朋友圈!", "Arial", 32);
+        shareMethod1.setColor(cc.color(255, 255, 255));
+        shareMethod1.setPosition(cc.p(winsize.width / 2, winsize.height / 2));
+        shareBG.addChild(shareMethod1);
+
+        var listener1 = cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            //onTouchBegan event callback function
+            onTouchBegan: function (touch, event) {
+                // event.getCurrentTarget() returns the *listener's* sceneGraphPriority node.
+                var target = event.getCurrentTarget();
+                target.parent.removeChild(target);
+
+
+            },
+            //Process the touch end event
+            onTouchEnded: function (touch, event) {
+                var target = event.getCurrentTarget();
+            }
+        });
+
+        cc.eventManager.addListener(listener1, shareBG);
+
+
     }
 });
 
