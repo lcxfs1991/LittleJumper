@@ -35,7 +35,7 @@ var GameResultLayer = cc.Layer.extend({
             this.onShare, this);
 
         var share = cc.Menu.create(this.ShareBtn);
-        share.setPosition(cc.p(winsize.width / 2, winsize.height / 2 - 200));
+        share.setPosition(cc.p(winsize.width / 2, winsize.height / 2 - 100));
         this.addChild(share);
 
 
