@@ -117,7 +117,7 @@ var StepTwo = cc.Sprite.extend({
 
     onGameOver:function(){
         var scene = cc.Scene.create();
-        scene.addChild(new GameResultLayer(this.gameJudge, this.status.number));
+        scene.addChild(new GameResultLayer(this.gameJudge, this.status));
         cc.director.runScene(cc.TransitionFade.create(1.2, scene));
     }
 

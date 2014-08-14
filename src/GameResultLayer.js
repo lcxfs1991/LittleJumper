@@ -5,11 +5,14 @@
 var GameResultLayer = cc.Layer.extend({
 
     secondResult: 0,
+    status:null,
 
-    ctor:function (gameJudge, result) {
-        this.secondResult = result;
+    ctor:function (gameJudge, status) {
+
+        this.status = status;
+        this.secondResult = status.number;
         this._super();
-        this.init(gameJudge, result);
+        this.init(gameJudge, status.number);
     },
     init:function (gameJudge, result) {
         this._super();
@@ -42,9 +45,39 @@ var GameResultLayer = cc.Layer.extend({
         //success message
         if (gameJudge == "Success"){
             var Msg = "祝贺你通关!";
+            document.title = "你的速度是 "+Math.round(this.secondResult * 100)/100+" 秒";
+            var descContent = "你的速度是 "+Math.round(this.secondResult * 100)/100+" 秒";
+            var shareTitle = "你的速度是 "+Math.round(this.secondResult * 100)/100+" 秒";
         }
         else{
-            var Msg = "虽失败，莫气馁!";
+
+            if (this.status.currentStep < 15){
+                var Msg = "寄语1: 虽失败，莫气馁!";
+            }
+            else if (this.status.currentStep >= 15 && this.status.currentStep < 30)
+            {
+                var Msg = "寄语2: 虽失败，莫气馁!";
+            }
+            else if (this.status.currentStep >= 30 && this.status.currentStep < 45)
+            {
+                var Msg = "寄语3: 虽失败，莫气馁!";
+            }
+            else if (this.status.currentStep >= 45 && this.status.currentStep < 70)
+            {
+                var Msg = "寄语4: 虽失败，莫气馁!";
+            }
+            else if (this.status.currentStep >= 70 && this.status.currentStep < 90)
+            {
+                var Msg = "寄语5: 虽失败，莫气馁!";
+            }
+            else if (this.status.currentStep >= 90)
+            {
+                var Msg = "寄语6: 虽失败，莫气馁!";
+            }
+
+            document.title = "快来玩 Little Jumper";
+            var descContent = "快来玩 Little Jumper";
+            var shareTitle = '快来玩 Little Jumper';
         }
 
         var MsgLabel = cc.LabelTTF.create(Msg, "Arial", 32);
@@ -58,6 +91,11 @@ var GameResultLayer = cc.Layer.extend({
         TimeResult.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 160));
         this.addChild(TimeResult);
 
+        var imgUrl = 'http://leehey.org/publish/res/runner.png';
+        var lineLink = 'http://leehey.org/publish';
+
+        shareTimeline(imgUrl, lineLink, descContent, shareTitle);
+
     },
 
     onRestart:function(){
@@ -69,8 +107,6 @@ var GameResultLayer = cc.Layer.extend({
     onShare:function(){
 
         var winsize = cc.director.getWinSize();
-
-        document.title = "你的速度是 "+Math.round(this.secondResult * 100)/100+" 秒", "Arial", 32;
 
         var shareBG = cc.LayerColor.create(cc.color(0,0,0), 400, 600);
         shareBG.setOpacity(200);
