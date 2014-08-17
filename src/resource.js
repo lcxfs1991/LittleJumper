@@ -12,7 +12,16 @@ var res = {
     Clock_png : "res/clock.png",
     Explosion_png : "res/explosion.png",
     Win_png : "res/win.png",
-    Share_png : "res/share.png"
+    Share_png : "res/share.png",
+    Door_png : "res/decorations/door.png",
+    TimeTable_png : "res/decorations/timetable.png",
+    Food_png : "res/decorations/food.png",
+    Book_png : "res/decorations/book.png",
+    Cert_png : "res/decorations/cert.png",
+    PC_png : "res/decorations/pc.png",
+    CV_png : "res/decorations/cv.png",
+    Suit_png : "res/decorations/suit.png",
+    PG_png: "res/decorations/pg.png"
 };
 
 var g_resources = [
@@ -28,7 +37,16 @@ var g_resources = [
     res.Clock_png,
     res.Explosion_png,
     res.Win_png,
-    res.Share_png
+    res.Share_png,
+    res.Door_png,
+    res.TimeTable_png,
+    res.Food_png,
+    res.Book_png,
+    res.Cert_png,
+    res.PC_png,
+    res.CV_png,
+    res.Suit_png,
+    res.PG_png
 
     //plist
 

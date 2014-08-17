@@ -22,6 +22,8 @@ var CloudLayer = cc.Layer.extend({
     pointToSetting:17,
     toolArray:null,
     centerIndex: 2,
+    decSetting:null,
+    decArray:null,
 
     ctor:function () {
 
@@ -40,6 +42,7 @@ var CloudLayer = cc.Layer.extend({
 
         this.cloudArray = new Array();
         this.toolArray = new Array();
+        this.decArray = new Array();
 
         this.initStage();
 
@@ -51,6 +54,7 @@ var CloudLayer = cc.Layer.extend({
 
         this.cloudSetting = new Array(this.cloudLimit);
         this.toolSetting = new Array(this.cloudLimit);
+        this.decSetting = new Array(this.cloudLimit);
 
         //initialization clouds
         for (var i = 0; i < this.cloudLimit + this.cloudHidden; i++ ){
@@ -101,6 +105,25 @@ var CloudLayer = cc.Layer.extend({
             }
         }
 
+        //initialization of tools
+        for (var i = 0; i < this.cloudLimit; i++){
+            this.decSetting[i] = 0;
+        }
+
+        //random decorations
+        for (var i = 1; i <= 8; i++){
+
+            var index = i * 10 - 1;
+
+            for (var j = index; j >= index - 9; j--){
+
+                if (this.cloudSetting[j] == 1){
+                    this.decSetting[j] = i;
+                    break;
+                }
+            }
+        }
+
         for (var i = 0; i < this.cloudLimit / 30; i++){
 
             var start = (0 + i * 30) ;
@@ -144,6 +167,10 @@ var CloudLayer = cc.Layer.extend({
             var tool = new ToolItem();
             tool.toolType = this.toolSetting[i];
             this.toolArray.push(tool);
+
+            var deco = new DecoItem();
+            deco.order = this.decSetting[i];
+            this.decArray.push(deco);
         }
 
         for (var i = 0; i < this.numOfcloud; i++){
@@ -154,6 +181,10 @@ var CloudLayer = cc.Layer.extend({
             this.addChild(this.toolArray[i].createTool(this.startPos, this.distance * i));
         }
 
+        for (var i = 0; i < this.numOfcloud; i++){
+            this.addChild(this.decArray[i].createDec(this.startPos, this.distance * i));
+        }
+
 
     },
 
@@ -161,8 +192,10 @@ var CloudLayer = cc.Layer.extend({
 
         var removeArray = [];
         var removeTool = [];
+        var removeDec = [];
         var index = -1;
         var index1 = -1
+        var index2 = -1;
 
         //move cloud
         for (var i = 0; i < this.numOfcloud; i++){
@@ -175,6 +208,10 @@ var CloudLayer = cc.Layer.extend({
                 this.toolArray[i].moveTool(num);
             }
 
+            if (this.decArray[i] != undefined){
+                this.decArray[i].moveDec(num);
+            }
+
         }
 
         //remove cloud && tool
@@ -182,6 +219,7 @@ var CloudLayer = cc.Layer.extend({
 
             removeArray.push(this.cloudArray[i]);
             removeTool.push(this.toolArray[i]);
+            removeDec.push(this.decArray[i]);
         }
 
         for (i in removeArray){
@@ -210,6 +248,19 @@ var CloudLayer = cc.Layer.extend({
             this.removeChild(targetAway1);
         }
 
+        for (k in removeDec){
+
+            var targetAway2 = removeDec[k];
+
+            var index2 = this.decArray.indexOf(targetAway2);
+
+            if (index2 > -1){
+                this.decArray.splice(index2, 1);
+            }
+
+            this.removeChild(targetAway2);
+        }
+
         //add cloud
         for (var i = 0; i < num; i++){
             if (this.cloudSetting[this.pointToSetting] != undefined){
@@ -224,6 +275,11 @@ var CloudLayer = cc.Layer.extend({
                 this.toolArray.push(tool);
                 this.toolArray[this.numOfcloud - (num - i)].toolType = this.toolSetting[this.pointToSetting];
                 this.addChild(this.toolArray[this.numOfcloud - (num - i)].createTool(this.startPos, this.distance * (this.upperBound - (num - i))));
+
+                var deco = new DecoItem();
+                this.decArray.push(deco);
+                this.decArray[this.numOfcloud - (num - i)].order = this.decSetting[this.pointToSetting];
+                this.addChild(this.decArray[this.numOfcloud - (num - i)].createDec(this.startPos, this.distance * (this.upperBound - (num - i))));
 
                 this.pointToSetting++;
             }
@@ -380,6 +436,67 @@ var ToolItem = cc.Sprite.extend({
     },
 
     moveTool:function(num){
+
+        var moveAction = cc.sequence(
+            cc.moveBy(0.2, cc.p(-this.moveDistance * num, 0))
+        );
+
+        this.runAction(moveAction);
+
+    }
+
+
+
+});
+
+//Tool
+var DecoItem = cc.Sprite.extend({
+
+    moveDistance: 90,
+    order: 0,
+
+    ctor:function(){
+
+        this._super();
+    },
+
+    createDec:function(startPos, distance){
+
+        if (this.order == 1){
+            this.initWithFile(res.Door_png);
+        }
+        else if (this.order == 2){
+            this.initWithFile(res.TimeTable_png);
+        }
+        else if (this.order == 3){
+            this.initWithFile(res.Food_png);
+        }
+        else if (this.order == 4){
+            this.initWithFile(res.Book_png);
+        }
+        else if (this.order == 5){
+            this.initWithFile(res.Cert_png);
+        }
+        else if (this.order == 6){
+            this.initWithFile(res.PC_png);
+        }
+        else if (this.order == 7){
+            this.initWithFile(res.CV_png);
+        }
+        else if (this.order == 8){
+            this.initWithFile(res.Suit_png);
+        }
+
+        this.attr({
+            x: startPos + distance,
+            y: 370
+        });
+
+
+        return this;
+    },
+
+    moveDec:function(num){
 
         var moveAction = cc.sequence(
             cc.moveBy(0.2, cc.p(-this.moveDistance * num, 0))
