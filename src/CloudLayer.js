@@ -105,24 +105,8 @@ var CloudLayer = cc.Layer.extend({
             }
         }
 
-        //initialization of tools
-        for (var i = 0; i < this.cloudLimit; i++){
-            this.decSetting[i] = 0;
-        }
-
-        //random decorations
-        for (var i = 1; i <= 8; i++){
-
-            var index = i * 10 - 1;
-
-            for (var j = index; j >= index - 9; j--){
-
-                if (this.cloudSetting[j] == 1){
-                    this.decSetting[j] = i;
-                    break;
-                }
-            }
-        }
+        //destination tab
+        this.toolSetting[this.cloudLimit - 1] = 3;
 
         for (var i = 0; i < this.cloudLimit / 30; i++){
 
@@ -147,11 +131,24 @@ var CloudLayer = cc.Layer.extend({
 
         }
 
-        //destination tab
-        this.toolSetting[this.cloudLimit - 1] = 3;
+        //initialization of decorations
+        for (var i = 0; i < this.cloudLimit; i++){
+            this.decSetting[i] = 0;
+        }
 
+        //random decorations
+        for (var i = 1; i <= 9; i++){
 
+            var index = i * 10 - 1;
 
+            for (var j = index; j >= index - 9; j--){
+
+                if (this.cloudSetting[j] == 1 && this.toolSetting[j] == 0){
+                    this.decSetting[j] = i;
+                    break;
+                }
+            }
+        }
 
     },
 
@@ -306,7 +303,7 @@ var CloudLayer = cc.Layer.extend({
 
                 var explodeAni = cc.sequence(
                     cc.rotateTo(0.1, 180),
-                    cc.scaleTo(0.1, 0.8)
+                    cc.scaleTo(0.1, 3)
                 );
 
                 explode.runAction(explodeAni);
@@ -346,6 +343,36 @@ var CloudLayer = cc.Layer.extend({
                 this.addChild(cutSecond);
 
                 return "Clock";
+            }
+            else if (this.decArray[this.centerIndex].order != 0 || this.decArray[this.centerIndex - 1].order != 0){
+
+//                var index = -1;
+                if (this.decArray[this.centerIndex].order != 0){
+                    var index = this.centerIndex;
+                }
+                else {
+                    var index = this.centerIndex - 1;
+                }
+
+                this.decArray[index].runAction(fadeAni);
+
+                var winSize = cc.director.getWinSize();
+
+                var tips = cc.LabelTTF.create(this.decArray[index].msg, "Helvetica", 23);
+                tips.setColor(cc.color(240,43,79)); //red
+                tips.setPosition(cc.p(winSize.width / 2, this.decArray[index].getPosition().y + 40));
+
+                var shrinkAni = cc.sequence(
+                    cc.moveBy(0.6, 0, 120),
+                    cc.fadeOut(3)
+
+                );
+
+                tips.runAction(shrinkAni);
+
+                this.addChild(tips);
+
+
             }
         }
 
@@ -454,6 +481,7 @@ var DecoItem = cc.Sprite.extend({
 
     moveDistance: 90,
     order: 0,
+    msg: null,
 
     ctor:function(){
 
@@ -464,27 +492,39 @@ var DecoItem = cc.Sprite.extend({
 
         if (this.order == 1){
             this.initWithFile(res.Door_png);
+            this.msg = "收拾一下宿舍，整整齐齐萌萌哒!";
         }
         else if (this.order == 2){
             this.initWithFile(res.TimeTable_png);
+            this.msg = " 安排好课程表，别走错教室啦>.<";
         }
         else if (this.order == 3){
             this.initWithFile(res.Food_png);
+            this.msg = "和室友唠叨唠叨，约同学吃吃饭";
         }
         else if (this.order == 4){
             this.initWithFile(res.Book_png);
+            this.msg = "逛逛图书馆，制定一份书单";
         }
         else if (this.order == 5){
             this.initWithFile(res.Cert_png);
+            this.msg = "查看各种考证信息";
         }
         else if (this.order == 6){
             this.initWithFile(res.PC_png);
+            this.msg = "上网看看各种招聘信息";
         }
         else if (this.order == 7){
             this.initWithFile(res.CV_png);
+            this.msg = "修改简历，让师兄师姐过目一下";
         }
         else if (this.order == 8){
             this.initWithFile(res.Suit_png);
+            this.msg = "买一套正装，为面试做准备";
+        }
+        else if (this.order == 9){
+            this.initWithFile(res.PG_png);
+            this.msg = "9.10宝洁2014校园招聘正式开始, \n我已经准备好啦!";
         }
 
         this.attr({

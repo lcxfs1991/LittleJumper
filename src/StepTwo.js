@@ -104,7 +104,7 @@ var StepTwo = cc.Sprite.extend({
                 cc.CallFunc.create(this.onGameOver, this)));
         }
 
-        cc.log("current step: "+(currentStep + this.centerIndex));
+//        cc.log("current step: "+(currentStep + this.centerIndex));
 //        cc.log("current cloud: "+this.cloud.cloudArray[currentStep + 7].display);
 
         if (this.gameJudge == "NoCloud" || this.gameJudge == "Explode"){
