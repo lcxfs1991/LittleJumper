@@ -134,7 +134,7 @@ var GameResultLayer = cc.Layer.extend({
     Beat: function(time){
 
         var averge = 14;
-        var std = 1;
+        var std = 2;
         var sign = 1;
 
         if (time > averge){
@@ -146,23 +146,23 @@ var GameResultLayer = cc.Layer.extend({
 
         var percent = 50;
 
-        if (diff <= 1){
+        if (diff <= 1 * std){
 
             percent += parseFloat(diff / std * 34.1) * sign;
 
         }
-        else if (diff > 1 * std && diff <= 2 *std){
+        else if (diff > 1 * std && diff <= 2 * std){
 
             percent += (34.1 * sign);
 
-            percent += parseFloat(diff / std * 13.6) * sign;
+            percent += parseFloat((diff - 1 * std) / std * 13.6) * sign;
 
         }
         else if (diff > 2 * std && diff <= 3 * std){
 
             percent += (47.7 * sign);
 
-            percent += parseFloat(diff / std * 2.1) * sign;
+            percent += parseFloat((diff - 2 * std) / std * 2.1) * sign;
 
             if (percent < 0){
                 percent = 3;
