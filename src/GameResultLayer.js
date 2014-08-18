@@ -47,9 +47,9 @@ var GameResultLayer = cc.Layer.extend({
             cc.Sprite.create(res.FL_png),
             this.onFollow, this);
 
-        var share = cc.Menu.create(this.FollowBtn);
-        share.setPosition(cc.p(winsize.width / 2, winsize.height / 2 - 200));
-        this.addChild(share);
+        var follow = cc.Menu.create(this.FollowBtn);
+        follow.setPosition(cc.p(winsize.width / 2, winsize.height / 2 - 200));
+        this.addChild(follow);
 
 
 
