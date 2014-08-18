@@ -5,7 +5,9 @@
 
 var StatusLayer = cc.Layer.extend({
 
-    labelLevel:null,
+    labelLife:0,
+    life:null,
+    lifeNum:0,
     labelMeter:null,
     _labelNumber:null,
     number:0.0,
@@ -24,21 +26,16 @@ var StatusLayer = cc.Layer.extend({
     init:function () {
         this._super();
 
-//        _level = new Array();
-//        _level[0] = "大一";
-//        _level[1] = "大二";
-//        _level[2] = "大三";
-//        _level[3] = "大四";
-//        _level[4] = "精英";
-
-//        this.currentLevel = _level[0];
-
         var winsize = cc.director.getWinSize();
 
-//        this.labelLevel = cc.LabelTTF.create("Level: "+this.currentLevel, "Helvetica", 32);
-//        this.labelCoin.setColor(cc.color(0,0,0));//black color
-//        this.labelLevel.setPosition(cc.p(110, winsize.height - 15));
-//        this.addChild(this.labelLevel);
+        this.life = cc.Sprite.create(res.Life_png);
+        this.life.setPosition(cc.p(20, winsize.height - 20));
+        this.addChild(this.life);
+
+        this.labelLife = cc.LabelTTF.create(""+this.lifeNum, "Helvetica", 32);
+        this.labelLife.setColor(cc.color(0,0,0));//black color
+        this.labelLife.setPosition(cc.p(60, winsize.height - 20));
+        this.addChild(this.labelLife);
 
         this.number = 0.0;
 
@@ -87,6 +84,26 @@ var StatusLayer = cc.Layer.extend({
 //        this.addChild(this.labelLevel);
 
         return this.currentStep;
+
+    },
+
+    updateLife:function(num){
+
+        var winsize = cc.director.getWinSize();
+
+        this.lifeNum += num;
+
+        this.removeChild(this.labelLife);
+
+        var showLife = this.lifeNum;
+
+        if (showLife < 0) showLife = 0;
+
+        this.labelLife = cc.LabelTTF.create(""+showLife, "Helvetica", 32);
+        this.labelLife.setColor(cc.color(0,0,0));//black color
+        this.labelLife.setPosition(cc.p(65, winsize.height - 20));
+        this.addChild(this.labelLife);
+
 
     },
 

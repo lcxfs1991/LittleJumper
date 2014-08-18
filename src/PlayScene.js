@@ -41,7 +41,7 @@ var PlayScene = cc.Scene.extend({
         this.addChild(this.status);
 
         //add cloud
-        this.cloud = new CloudLayer();
+        this.cloud = new CloudLayer(this.status);
         this.addChild(this.cloud);
 
         //add step two control
@@ -51,6 +51,9 @@ var PlayScene = cc.Scene.extend({
         //add step three control
         this.stepThree = new StepThree(this.player, this.cloud, this.status);
         this.addChild(this.stepThree);
+
+        this.stepTwo.getParent(this);
+        this.stepThree.getParent(this);
 
     }
 });

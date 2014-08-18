@@ -15,6 +15,8 @@ var StepThree = cc.Sprite.extend({
     gameJudge:null,
     centerIndex: 2,
     listener: null,
+    currentStep:0,
+    parentN: null,
 
     ctor:function(player, cloud, setting){
 
@@ -86,12 +88,21 @@ var StepThree = cc.Sprite.extend({
 
     },
 
+    getParent:function(parentN){
+
+        this.parentN = parentN;
+    },
+
     playerJump:function(){
+
         this.cloud.moveCloud(2);
 
-        var currentStep = this.status.updateLevel(2);
+        //remove Angel effect
+        this.player.removeAngel();
 
-        this.gameJudge = this.cloud.checkEffect(this.player.spriteRunner, currentStep);
+        this.currentStep = this.status.updateLevel(2);
+
+        this.gameJudge = this.cloud.checkEffect(this.player.spriteRunner, this.currentStep);
 
         this.player.jump(this.gameJudge);
 
@@ -100,7 +111,7 @@ var StepThree = cc.Sprite.extend({
         }
 
         // +7 because there is 7 empty clouds at initial stage
-        if (currentStep + this.centerIndex >= 89 && this.cloud.cloudArray[this.centerIndex].display != 0){
+        if (this.currentStep + this.centerIndex >= 89 && this.cloud.cloudArray[this.centerIndex].display != 0){
             this.gameJudge = "Success";
 //            cc.eventManager.removeListener(this.listener1);
             cc.eventManager.removeAllListeners();
@@ -114,10 +125,25 @@ var StepThree = cc.Sprite.extend({
 //        cc.log("current step: "+(currentStep + this.centerIndex));
 //        cc.log("current cloud: "+this.cloud.cloudArray[currentStep + 7].display);
 
-        if (this.gameJudge == "NoCloud" || this.gameJudge == "Explode" || (currentStep + this.centerIndex >= 89 && this.cloud.cloudArray[this.centerIndex].display == 0)){
-            this.runAction(cc.Sequence.create(
-                cc.DelayTime.create(0.2),
-                cc.CallFunc.create(this.onGameOver, this)));
+        if (this.gameJudge == "NoCloud" || this.gameJudge == "Explode" || (this.currentStep + this.centerIndex >= 89 && this.cloud.cloudArray[this.centerIndex].display == 0)){
+
+            this.status.updateLife(-1);
+
+            if (this.status.lifeNum < 0){
+
+                this.runAction(cc.Sequence.create(
+                    cc.DelayTime.create(0.2),
+                    cc.CallFunc.create(this.onGameOver, this)));
+
+            }
+            else {
+
+                cc.eventManager.removeAllListeners();
+                this.runAction(cc.Sequence.create(
+                    cc.DelayTime.create(0.5),
+                    cc.CallFunc.create(this.onResume, this)));
+
+            }
         }
 
     },
@@ -126,6 +152,21 @@ var StepThree = cc.Sprite.extend({
         var scene = cc.Scene.create();
         scene.addChild(new GameResultLayer(this.gameJudge, this.status));
         cc.director.runScene(cc.TransitionFade.create(1.2, scene));
+    },
+
+    onResume:function(){
+
+        this.player.removeChild(this.player.spriteRunner);
+        this.player.spriteRunner.setPosition(cc.p(155, 415));
+        this.player.spriteRunner.setScale(0.5);
+        this.player.addChild(this.player.spriteRunner);
+//        this.currentStep -= 2;
+//        this.status.currentStep -= 2;
+        cc.log("resume");
+        cc.eventManager.addListener(this.listener1, this);
+        cc.eventManager.addListener(this.parentN.stepTwo.listener1, this.parentN.stepTwo);
+        this.player.addAngel();
+
     }
 
 });

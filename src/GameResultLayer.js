@@ -49,8 +49,8 @@ var GameResultLayer = cc.Layer.extend({
 
         var follow = cc.Menu.create(this.FollowBtn);
         follow.setPosition(cc.p(winsize.width / 2, winsize.height / 2 - 200));
+        follow.zIndex = 100;
         this.addChild(follow);
-
 
 
 

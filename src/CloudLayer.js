@@ -24,12 +24,15 @@ var CloudLayer = cc.Layer.extend({
     centerIndex: 2,
     decSetting:null,
     decArray:null,
+    status:null,
 
-    ctor:function () {
+    ctor:function (status) {
 
         this._super();
 
         this.genCloud();
+
+        this.status = status;
 
         this.init();
     },
@@ -330,9 +333,9 @@ var CloudLayer = cc.Layer.extend({
             else if (this.toolArray[this.centerIndex].toolType == 2){
                 this.toolArray[this.centerIndex].runAction(fadeAni);
 
-                var cutSecond = cc.LabelTTF.create("减2秒", "Helvetica", 32);
+                var cutSecond = cc.LabelTTF.create("减2秒", "Helvetica", 28);
                 cutSecond.setColor(cc.color(240,43,79)); //red
-                cutSecond.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x - this.distance - 20, this.toolArray[this.centerIndex].getPosition().y + 40));
+                cutSecond.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x - this.distance - 20, this.toolArray[this.centerIndex].getPosition().y + 20));
 
                 var shrinkAni = cc.sequence(
                   cc.moveBy(0.6, 0, 80),
@@ -346,18 +349,12 @@ var CloudLayer = cc.Layer.extend({
 
                 return "Clock";
             }
-            else if (this.decArray[this.centerIndex].order != 0 || this.decArray[this.centerIndex - 1].order != 0){
+            else if (this.decArray[this.centerIndex].order != 0){
 
-                var index = -1;
-                if (this.decArray[this.centerIndex].order != 0 && this.decArray[this.centerIndex].order != undefined){
-                    index = this.centerIndex;
-                    cc.log("order:"+this.decArray[this.centerIndex].order);
-                    cc.log("current: "+this.centerIndex);
-                }
-                else {
-                    index = this.centerIndex - 1;
-                    cc.log("minus 1");
-                }
+                //add life
+                this.status.updateLife(0.5);
+
+                var index = this.centerIndex;
 
                 this.decArray[index].runAction(fadeAni);
 
@@ -389,7 +386,33 @@ var CloudLayer = cc.Layer.extend({
 
                 this.addChild(tips);
 
-//                cc.log("index = "+this.decArray[index].order);
+                //add life tips
+                var addLife = cc.LabelTTF.create("加半条命", "Helvetica", 28);
+                addLife.setColor(cc.color(240,43,79)); //red
+                addLife.setPosition(cc.p(this.decArray[this.centerIndex].getPosition().x - this.distance - 20, this.decArray[this.centerIndex].getPosition().y + 20));
+
+                var shrinkAni1 = cc.sequence(
+                    cc.moveBy(0.6, 0, 80),
+                    cc.fadeOut(1.5)
+
+                );
+
+                addLife.runAction(shrinkAni1);
+
+                this.addChild(addLife);
+
+            }
+
+            if (this.decArray[this.centerIndex].order != 0 || this.decArray[this.centerIndex - 1].order != 0){
+
+                var index = -1;
+                if (this.decArray[this.centerIndex].order != 0 && this.decArray[this.centerIndex].order != undefined){
+                    index = this.centerIndex;
+                }
+                else {
+                    index = this.centerIndex - 1;
+                }
+
                 if (this.decArray[index].order == 9 && this.cloudArray[this.centerIndex].display != 0){
                     this.spark = new Spark();
                     this.addChild(this.spark);
@@ -400,6 +423,8 @@ var CloudLayer = cc.Layer.extend({
         }
 
         if (this.cloudArray[this.centerIndex].display != undefined && this.cloudArray[this.centerIndex].display == 0){
+
+
                 return "NoCloud";
         }
 

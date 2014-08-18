@@ -6,6 +6,8 @@
 var AnimationLayer = cc.Layer.extend({
 
     spriteRunner: null,
+    angel:null,
+    repeatAction:null,
 
     ctor:function () {
         this._super();
@@ -23,7 +25,6 @@ var AnimationLayer = cc.Layer.extend({
 //        spriteRunner.runAction(cc.Sequence.create(actionTo));
         this.addChild(this.spriteRunner);
 
-//        this.jump();
     },
     jump:function(gameJudge){
 
@@ -37,7 +38,7 @@ var AnimationLayer = cc.Layer.extend({
         else if (gameJudge == "NoCloud"){
             var jumpAction = cc.sequence(
                 cc.moveBy(0.1, cc.p(0, 50)),
-                cc.moveBy(0.8, cc.p(0, -450)).easing(cc.easeIn(0.3))
+                cc.moveBy(0.8, cc.p(0, -550)).easing(cc.easeIn(0.3))
             );
         }
         else
@@ -49,7 +50,39 @@ var AnimationLayer = cc.Layer.extend({
         }
 
 
-        this.runAction(jumpAction);
+        this.spriteRunner.runAction(jumpAction);
+
+    },
+
+    addAngel:function(){
+
+        //create angel
+        this.angel = cc.Sprite.create(res.Angel_png);
+        this.angel.attr({x: 155, y: 480});
+        this.addChild(this.angel);
+
+        var angelAction = cc.sequence(
+            cc.moveBy(0.5, cc.p(0, 20)),
+            cc.moveBy(0.5, cc.p(0, -20))
+        );
+
+        this.repeatAction = cc.repeatForever(angelAction);
+
+        this.runAction(this.repeatAction);
+
+
+    },
+
+    removeAngel:function(){
+
+        if (this.angel != null){
+            this.removeChild(this.angel);
+        }
+
+
+        if (this.repeatAction != null){
+            this.stopAction(this.repeatAction);
+        }
 
     }
 });
