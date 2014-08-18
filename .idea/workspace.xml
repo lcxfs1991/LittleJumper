@@ -72,8 +72,8 @@
       <file leaf-file-name="StatusLayer.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/StatusLayer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7261698" vertical-offset="286" max-vertical-offset="1695">
-              <caret line="47" column="77" selection-start-line="47" selection-start-column="77" selection-end-line="47" selection-end-column="77" />
+            <state vertical-scroll-proportion="0.4662045" vertical-offset="286" max-vertical-offset="1695">
+              <caret line="37" column="93" selection-start-line="37" selection-start-column="93" selection-end-line="37" selection-end-column="93" />
               <folding />
             </state>
           </provider>
@@ -854,8 +854,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/StatusLayer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7261698" vertical-offset="286" max-vertical-offset="1695">
-          <caret line="47" column="77" selection-start-line="47" selection-start-column="77" selection-end-line="47" selection-end-column="77" />
+        <state vertical-scroll-proportion="0.4662045" vertical-offset="286" max-vertical-offset="1695">
+          <caret line="37" column="93" selection-start-line="37" selection-start-column="93" selection-end-line="37" selection-end-column="93" />
           <folding />
         </state>
       </provider>
