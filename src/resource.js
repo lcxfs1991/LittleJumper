@@ -1,9 +1,7 @@
 var res = {
     JumpBG_png : "res/Bg.png",
     StartBtn_png : "res/start.png",
-    StartBtnDone_png : "res/start_done.png",
     ReStartBtn_png : "res/restart.png",
-    ReStartBtnDone_png : "res/restart_done.png",
     Runner_png : "res/runner.png",
     Cloud_png : "res/cloud.png",
     Step2_png : "res/two_step.png",
@@ -23,14 +21,15 @@ var res = {
     Suit_png : "res/decorations/suit.png",
     PG_png: "res/decorations/pg.png",
     LOSE_png : "res/lose.png",
-    WINBG_png : "res/winBG.png"
+    WINBG_png : "res/winBG.png",
+    FL_png : "res/follow.png"
 };
 
 var g_resources = [
     //image
     res.JumpBG_png,
     res.StartBtn_png,
-    res.StartBtnDone_png,
+    res.ReStartBtn_png,
     res.Runner_png,
     res.Cloud_png,
     res.Step2_png,
@@ -50,7 +49,8 @@ var g_resources = [
     res.Suit_png,
     res.PG_png,
     res.LOSE_png,
-    res.WINBG_png
+    res.WINBG_png,
+    res.FL_png
 
     //plist
 

@@ -24,7 +24,7 @@ var GameResultLayer = cc.Layer.extend({
         //restart button
         this.RestartBtn = cc.MenuItemSprite.create(
             cc.Sprite.create(res.ReStartBtn_png), // normal state image
-            cc.Sprite.create(res.ReStartBtnDone_png), //select state image
+            cc.Sprite.create(res.ReStartBtn_png), //select state image
             this.onRestart, this);
 
         var menu = cc.Menu.create(this.RestartBtn);
@@ -40,6 +40,18 @@ var GameResultLayer = cc.Layer.extend({
         var share = cc.Menu.create(this.ShareBtn);
         share.setPosition(cc.p(winsize.width / 2, winsize.height / 2 - 100));
         this.addChild(share);
+
+        //follow button
+        this.FollowBtn = cc.MenuItemSprite.create(
+            cc.Sprite.create(res.FL_png),
+            cc.Sprite.create(res.FL_png),
+            this.onFollow, this);
+
+        var share = cc.Menu.create(this.FollowBtn);
+        share.setPosition(cc.p(winsize.width / 2, winsize.height / 2 - 200));
+        this.addChild(share);
+
+
 
 
         //success message
@@ -129,6 +141,10 @@ var GameResultLayer = cc.Layer.extend({
 
         cc.eventManager.addListener(listener1, shareBG);
 
+    },
+
+    onFollow: function(){
+        window.location = "http://mp.weixin.qq.com/s?__biz=MjM5MTA0NzU1NQ==&mid=200591326&idx=1&sn=0e3919ce9ed1c8c50a0eacf214326b02&3rd=MzA3MDU4NTYzMw==&scene=6#rd";
     },
 
     Beat: function(time){

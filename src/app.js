@@ -64,7 +64,7 @@ var MenuLayer = cc.Layer.extend({
 
         this.startBtn = cc.MenuItemSprite.create(
             cc.Sprite.create(res.StartBtn_png), // normal state image
-            cc.Sprite.create(res.StartBtnDone_png), //select state image
+            cc.Sprite.create(res.StartBtn_png), //select state image
             this.onPlay, this);
 
         var menu = cc.Menu.create(this.startBtn);
