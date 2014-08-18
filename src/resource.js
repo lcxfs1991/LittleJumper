@@ -22,7 +22,11 @@ var res = {
     PG_png: "res/decorations/pg.png",
     LOSE_png : "res/lose.png",
     WINBG_png : "res/winBG.png",
-    FL_png : "res/follow.png"
+    FL_png : "res/follow.png",
+    SPK1_png : "res/spark/spark1.png",
+    SPK2_png : "res/spark/spark2.png",
+    SPK3_png : "res/spark/spark3.png",
+    SPK4_png : "res/spark/spark4.png"
 };
 
 var g_resources = [
@@ -50,7 +54,11 @@ var g_resources = [
     res.PG_png,
     res.LOSE_png,
     res.WINBG_png,
-    res.FL_png
+    res.FL_png,
+    res.SPK1_png,
+    res.SPK2_png,
+    res.SPK3_png,
+    res.SPK4_png
 
     //plist
 

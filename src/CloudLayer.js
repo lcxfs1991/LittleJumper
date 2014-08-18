@@ -137,7 +137,7 @@ var CloudLayer = cc.Layer.extend({
         }
 
         //random decorations
-        for (var i = 1; i <= 9; i++){
+        for (var i = 1; i <= 8; i++){
 
             var index = i * 10 - 1;
 
@@ -149,6 +149,8 @@ var CloudLayer = cc.Layer.extend({
                 }
             }
         }
+
+        this.decSetting[this.cloudLimit - 1] = 9;
 
     },
 
@@ -346,12 +348,15 @@ var CloudLayer = cc.Layer.extend({
             }
             else if (this.decArray[this.centerIndex].order != 0 || this.decArray[this.centerIndex - 1].order != 0){
 
-//                var index = -1;
-                if (this.decArray[this.centerIndex].order != 0){
-                    var index = this.centerIndex;
+                var index = -1;
+                if (this.decArray[this.centerIndex].order != 0 && this.decArray[this.centerIndex].order != undefined){
+                    index = this.centerIndex;
+                    cc.log("order:"+this.decArray[this.centerIndex].order);
+                    cc.log("current: "+this.centerIndex);
                 }
                 else {
-                    var index = this.centerIndex - 1;
+                    index = this.centerIndex - 1;
+                    cc.log("minus 1");
                 }
 
                 this.decArray[index].runAction(fadeAni);
@@ -360,17 +365,35 @@ var CloudLayer = cc.Layer.extend({
 
                 var tips = cc.LabelTTF.create(this.decArray[index].msg, "Helvetica", 23);
                 tips.setColor(cc.color(240,43,79)); //red
+                tips.zIndex = 100;
                 tips.setPosition(cc.p(winSize.width / 2, this.decArray[index].getPosition().y + 40));
 
-                var shrinkAni = cc.sequence(
-                    cc.moveBy(0.6, 0, 120),
-                    cc.fadeOut(3)
+                if (this.decArray[index].order % 2 == 0){
+                    var shrinkAni = cc.sequence(
+                        cc.moveBy(0.6, 0, 120),
+                        cc.fadeOut(8)
 
-                );
+                    );
+                }
+                else{
+
+                    var shrinkAni = cc.sequence(
+                        cc.moveBy(0.6, 0, 90),
+                        cc.fadeOut(8)
+
+                    );
+                }
+
 
                 tips.runAction(shrinkAni);
 
                 this.addChild(tips);
+
+//                cc.log("index = "+this.decArray[index].order);
+                if (this.decArray[index].order == 9 && this.cloudArray[this.centerIndex].display != 0){
+                    this.spark = new Spark();
+                    this.addChild(this.spark);
+                }
 
 
             }
@@ -448,7 +471,7 @@ var ToolItem = cc.Sprite.extend({
                 this.initWithFile(res.Clock_png);
             }
             else if (this.toolType == 3){
-                this.initWithFile(res.Win_png);
+                this.initWithFile(res.PG_png);
             }
 
 

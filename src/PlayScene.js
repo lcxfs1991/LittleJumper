@@ -11,6 +11,7 @@ var PlayScene = cc.Scene.extend({
     cloud: null,
     stepTwo: null,
     stepThree: null,
+    spark: null,
 
     onEnter:function () {
         this._super();

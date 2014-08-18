@@ -14,6 +14,7 @@ var StepThree = cc.Sprite.extend({
     status:null,
     gameJudge:null,
     centerIndex: 2,
+    listener: null,
 
     ctor:function(player, cloud, setting){
 
@@ -35,7 +36,7 @@ var StepThree = cc.Sprite.extend({
         });
 
         //Create a "one by one" touch event listener (processes one touch at a time)
-        var listener1 = cc.EventListener.create({
+        this.listener1 = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             // When "swallow touches" is true, then returning 'true' from the onTouchBegan method will "swallow" the touch event, preventing other listeners from using it.
             swallowTouches: true,
@@ -81,7 +82,7 @@ var StepThree = cc.Sprite.extend({
             }
         });
 
-        cc.eventManager.addListener(listener1, this);
+        cc.eventManager.addListener(this.listener1, this);
 
     },
 
@@ -99,18 +100,21 @@ var StepThree = cc.Sprite.extend({
         }
 
         // +7 because there is 7 empty clouds at initial stage
-        if (currentStep + this.centerIndex >= 89){
+        if (currentStep + this.centerIndex >= 89 && this.cloud.cloudArray[this.centerIndex].display != 0){
             this.gameJudge = "Success";
-            cc.log(this.gameJudge);
+//            cc.eventManager.removeListener(this.listener1);
+            cc.eventManager.removeAllListeners();
+            this.status.stopScheduler();
+//            cc.log(this.gameJudge);
             this.runAction(cc.Sequence.create(
-                cc.DelayTime.create(0.2),
+                cc.DelayTime.create(4),
                 cc.CallFunc.create(this.onGameOver, this)));
         }
 
 //        cc.log("current step: "+(currentStep + this.centerIndex));
 //        cc.log("current cloud: "+this.cloud.cloudArray[currentStep + 7].display);
 
-        if (this.gameJudge == "NoCloud" || this.gameJudge == "Explode"){
+        if (this.gameJudge == "NoCloud" || this.gameJudge == "Explode" || (currentStep + this.centerIndex >= 89 && this.cloud.cloudArray[this.centerIndex].display == 0)){
             this.runAction(cc.Sequence.create(
                 cc.DelayTime.create(0.2),
                 cc.CallFunc.create(this.onGameOver, this)));

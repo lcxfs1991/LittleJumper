@@ -10,6 +10,7 @@ var StepTwo = cc.Sprite.extend({
     status:null,
     gameJudge:"Normal",
     centerIndex: 2,
+    listener1 : null,
 
     ctor:function(player, cloud, setting){
 
@@ -31,7 +32,7 @@ var StepTwo = cc.Sprite.extend({
         });
 
         //Create a "one by one" touch event listener (processes one touch at a time)
-        var listener1 = cc.EventListener.create({
+        this.listener1 = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             // When "swallow touches" is true, then returning 'true' from the onTouchBegan method will "swallow" the touch event, preventing other listeners from using it.
             swallowTouches: true,
@@ -78,7 +79,7 @@ var StepTwo = cc.Sprite.extend({
             }
         });
 
-        cc.eventManager.addListener(listener1, this);
+        cc.eventManager.addListener(this.listener1, this);
 
     },
 
@@ -98,9 +99,12 @@ var StepTwo = cc.Sprite.extend({
         // +7 because there is 7 empty clouds at initial stage
         if (currentStep + this.centerIndex >= 89){
             this.gameJudge = "Success";
-            cc.log(this.gameJudge);
+//            cc.eventManager.removeListener(this.listener1);
+            cc.eventManager.removeAllListeners();
+            this.status.stopScheduler();
+//            cc.log(this.gameJudge);
             this.runAction(cc.Sequence.create(
-                cc.DelayTime.create(0.2),
+                cc.DelayTime.create(4),
                 cc.CallFunc.create(this.onGameOver, this)));
         }
 

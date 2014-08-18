@@ -21,6 +21,7 @@
         "src/StepTwo.js",
         "src/StepThree.js",
         "src/SimpleTouch.js",
-        "src/GameResultLayer.js"
+        "src/GameResultLayer.js",
+        "src/Spark.js"
     ]
 }

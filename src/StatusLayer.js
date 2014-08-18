@@ -90,6 +90,10 @@ var StatusLayer = cc.Layer.extend({
 
     },
 
+    stopScheduler: function(){
+        this.unschedule(this.updateNumber);
+    },
+
     cutSecond:function(){
         this.number -= 2.0;
 
