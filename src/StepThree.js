@@ -111,8 +111,16 @@ var StepThree = cc.Sprite.extend({
         }
 
         // +7 because there is 7 empty clouds at initial stage
-        if (this.currentStep + this.centerIndex >= 89 && this.cloud.cloudArray[this.centerIndex].display != 0){
+        if (this.currentStep + this.centerIndex >= 89){
             this.gameJudge = "Success";
+
+            if (this.currentStep + this.centerIndex >= 89 && this.cloud.cloudArray[this.centerIndex].display == 0){
+                cc.eventManager.removeAllListeners();
+                this.runAction(cc.Sequence.create(
+                    cc.DelayTime.create(0.5),
+                    cc.CallFunc.create(this.onResume, this)));
+            }
+
             cc.eventManager.removeAllListeners();
             this.status.stopScheduler();
             this.runAction(cc.Sequence.create(
@@ -120,7 +128,7 @@ var StepThree = cc.Sprite.extend({
                 cc.CallFunc.create(this.onGameOver, this)));
         }
 
-        if (this.gameJudge == "NoCloud" || this.gameJudge == "Explode" || (this.currentStep + this.centerIndex >= 89 && this.cloud.cloudArray[this.centerIndex].display == 0)){
+        if (this.gameJudge == "NoCloud" || this.gameJudge == "Explode"){
 
             this.status.updateLife(-1);
 

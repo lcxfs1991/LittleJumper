@@ -403,7 +403,7 @@ var CloudLayer = cc.Layer.extend({
 
             }
 
-            if (this.decArray[this.centerIndex].order != 0 || this.decArray[this.centerIndex - 1].order != 0){
+            if (this.decArray[this.centerIndex].order == 9 || this.decArray[this.centerIndex - 1].order == 9){
 
                 var index = -1;
                 if (this.decArray[this.centerIndex].order != 0 && this.decArray[this.centerIndex].order != undefined){
@@ -413,12 +413,8 @@ var CloudLayer = cc.Layer.extend({
                     index = this.centerIndex - 1;
                 }
 
-                if (this.decArray[index].order == 9 && this.cloudArray[this.centerIndex].display != 0){
-                    this.spark = new Spark();
-                    this.addChild(this.spark);
-                }
-
-
+                this.spark = new Spark();
+                this.addChild(this.spark);
             }
         }
 
