@@ -14,12 +14,8 @@ var PlayScene = cc.Scene.extend({
     spark: null,
 
     onEnter:function () {
+
         this._super();
-//        this.addChild(new AnimationLayer());
-//        this.addChild(new StatusLayer());
-//        this.addChild(new CloudLayer());
-//        this.addChild(new StepTwo());
-//        this.addChild(new StepThree());
         this.initData();
     },
 

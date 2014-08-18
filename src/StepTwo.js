@@ -156,9 +156,7 @@ var StepTwo = cc.Sprite.extend({
         this.player.spriteRunner.setPosition(cc.p(155, 415));
         this.player.spriteRunner.setScale(0.5);
         this.player.addChild(this.player.spriteRunner);
-//        this.currentStep -= 1;
-//        this.status.currentStep -= 1;
-        cc.log("resume");
+
         cc.eventManager.addListener(this.listener1, this);
         cc.eventManager.addListener(this.parentN.stepThree.listener1, this.parentN.stepThree);
         this.player.addAngel();
