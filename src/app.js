@@ -4,10 +4,9 @@ var MenuLayer = cc.Layer.extend({
     ctor : function(){
         //1. call super class's ctor function
         this._super();
-
         //remove loading hint
-        var loading = document.getElementById('loading');
-        loading.remove();
+//        var loading = document.getElementById('loading');
+//        loading.remove();
     },
     init:function () {
         // super init first
@@ -18,6 +17,10 @@ var MenuLayer = cc.Layer.extend({
 
 
         var centerpos = cc.p(size.width / 2, size.height / 2);
+
+        var blackBG = cc.Sprite.create(cc.color(205,205,205));
+        blackBG.setPosition(centerpos);
+        this.addChild(blackBG);
 
         this.startBtn = cc.MenuItemSprite.create(
             cc.Sprite.create(res.StartBtn_png), // normal state image

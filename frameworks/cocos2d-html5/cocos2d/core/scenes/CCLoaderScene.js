@@ -60,7 +60,7 @@ cc.LoaderScene = cc.Scene.extend({
         var centerPos = cc.p(winsize.width / 2, winsize.height / 2 - 140);
         label.setPosition(centerPos);
         label.textAlign = 1;
-        label.fontSize = 25;
+//        label.fontSize = 25;
 //        label.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, lblHeight)));
         label.setColor(cc.color(180, 180, 180));
         bgLayer.addChild(this._label, 10);
@@ -89,7 +89,7 @@ cc.LoaderScene = cc.Scene.extend({
         cc.Node.prototype.onExit.call(this);
         var tmpStr = "Loading... 0%\n" + "毕业季，招聘季还远么？\n让我们跟着毕业狗跳，\n看看开学要做哪些准备吧！！！";
         this._label.setString(tmpStr);
-        this._label.setFontSize(25);
+//        this._label.setFontSize(25);
     },
 
     /**
@@ -123,7 +123,7 @@ cc.LoaderScene = cc.Scene.extend({
         var percent = (count / length * 100) | 0;
         percent = Math.min(percent, 100);
         self._label.setString("Loading... " + percent + "%\n" + "毕业季，招聘季还远么？\n让我们跟着毕业狗跳，\n看看开学要做哪些准备吧！！！");
-        self._label.setFontSize(25);
+//        self._label.setFontSize(25);
         if(count >= length) self.unschedule(self._updatePercent);
     }
 });
