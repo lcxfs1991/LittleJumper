@@ -21,7 +21,9 @@ var res = {
     PC_png : "res/decorations/pc.png",
     CV_png : "res/decorations/cv.png",
     Suit_png : "res/decorations/suit.png",
-    PG_png: "res/decorations/pg.png"
+    PG_png: "res/decorations/pg.png",
+    LOSE_png : "res/lose.png",
+    WINBG_png : "res/winBG.png"
 };
 
 var g_resources = [
@@ -46,7 +48,9 @@ var g_resources = [
     res.PC_png,
     res.CV_png,
     res.Suit_png,
-    res.PG_png
+    res.PG_png,
+    res.LOSE_png,
+    res.WINBG_png
 
     //plist
 

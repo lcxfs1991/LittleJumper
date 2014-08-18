@@ -44,52 +44,40 @@ var GameResultLayer = cc.Layer.extend({
 
         //success message
         if (gameJudge == "Success"){
-            var Msg = "祝贺你通关!";
-            document.title = "你的速度是 "+Math.round(this.secondResult * 100)/100+" 秒";
-            var descContent = "你的速度是 "+Math.round(this.secondResult * 100)/100+" 秒";
-            var shareTitle = "你的速度是 "+Math.round(this.secondResult * 100)/100+" 秒";
+
+            this.Background = cc.Sprite.create(res.WINBG_png);
+            this.Background.setPosition(cc.p(winsize / 2, winsize / 2));
+            this.Background.zIndex = -10;
+            this.addChild(this.Background);
+
+            var resultSec = Math.round(this.secondResult * 100)/100;
+            var Msg = "你以 "+resultSec+" 秒击败"+this.Beat(resultSec)+"%的对手\n赶紧分享给小伙伴，\n让他们也来跳跳跳吧！";
+            document.title = Msg;
+            var descContent = Msg;
+            var shareTitle = Msg;
+
+//            var TimeResult = cc.LabelTTF.create(, "Arial", 32);
+//            TimeResult.setColor(cc.color(255, 255, 255));
+//            TimeResult.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 160));
+//            this.addChild(TimeResult);
         }
         else{
 
-            if (this.status.currentStep < 15){
-                var Msg = "寄语1: 虽失败，莫气馁!";
-            }
-            else if (this.status.currentStep >= 15 && this.status.currentStep < 30)
-            {
-                var Msg = "寄语2: 虽失败，莫气馁!";
-            }
-            else if (this.status.currentStep >= 30 && this.status.currentStep < 45)
-            {
-                var Msg = "寄语3: 虽失败，莫气馁!";
-            }
-            else if (this.status.currentStep >= 45 && this.status.currentStep < 70)
-            {
-                var Msg = "寄语4: 虽失败，莫气馁!";
-            }
-            else if (this.status.currentStep >= 70 && this.status.currentStep < 90)
-            {
-                var Msg = "寄语5: 虽失败，莫气馁!";
-            }
-            else if (this.status.currentStep >= 90)
-            {
-                var Msg = "寄语6: 虽失败，莫气馁!";
-            }
+            this.Background = cc.Sprite.create(res.LOSE_png);
+            this.Background.setPosition(cc.p(winsize / 2, winsize / 2));
+            this.Background.zIndex = -10;
+            this.addChild(this.Background);
 
-            document.title = "快来玩 Little Jumper";
-            var descContent = "快来玩 Little Jumper";
-            var shareTitle = '快来玩 Little Jumper';
+            document.title = "是毕业狗的都快来玩!";
+            var descContent = "是毕业狗的都快来玩!";
+            var shareTitle = '是毕业狗的都快来玩!';
+            var Msg = "毕业狗，再苦再累也有收获!";
         }
 
-        var MsgLabel = cc.LabelTTF.create(Msg, "Arial", 32);
-        MsgLabel.setColor(cc.color(255, 255, 255));
-        MsgLabel.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 80));
+        var MsgLabel = cc.LabelTTF.create(Msg, "Arial", 28);
+        MsgLabel.setColor(cc.color(0, 0, 0));
+        MsgLabel.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 140));
         this.addChild(MsgLabel);
-
-//        cc.log("second "+result);
-        var TimeResult = cc.LabelTTF.create("你的速度是 "+Math.round(result*100)/100+" 秒", "Arial", 32);
-        TimeResult.setColor(cc.color(255, 255, 255));
-        TimeResult.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 160));
-        this.addChild(TimeResult);
 
         var imgUrl = 'http://leehey.org/publish/res/runner.png';
         var lineLink = 'http://leehey.org/publish';
@@ -100,7 +88,7 @@ var GameResultLayer = cc.Layer.extend({
 
     onRestart:function(){
 
-        document.title = "Little Jumper";
+        document.title = "毕业狗跳跳跳!";
         cc.director.runScene(new PlayScene());
     },
 
@@ -141,6 +129,61 @@ var GameResultLayer = cc.Layer.extend({
 
         cc.eventManager.addListener(listener1, shareBG);
 
+    },
+
+    Beat: function(time){
+
+        var averge = 14;
+        var std = 1;
+        var sign = 1;
+
+        if (time > averge){
+
+            sign = -1;
+        }
+
+        var diff = Math.abs(time - averge);
+
+        var percent = 50;
+
+        if (diff <= 1){
+
+            percent += parseFloat(diff / std * 34.1) * sign;
+
+        }
+        else if (diff > 1 * std && diff <= 2 *std){
+
+            percent += (34.1 * sign);
+
+            percent += parseFloat(diff / std * 13.6) * sign;
+
+        }
+        else if (diff > 2 * std && diff <= 3 * std){
+
+            percent += (47.7 * sign);
+
+            percent += parseFloat(diff / std * 2.1) * sign;
+
+            if (percent < 0){
+                percent = 3;
+            }
+            else if (percent > 100){
+                percent = 100;
+            }
+
+        }
+        else if (diff > 3 * std){
+
+            if (sign < 0){
+                percent = 3;
+            }
+            else {
+                percent = 100;
+            }
+
+        }
+
+        return Math.round(percent * 100 / 100);
 
     }
 });
