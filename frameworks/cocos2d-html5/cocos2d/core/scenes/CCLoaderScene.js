@@ -57,7 +57,7 @@ cc.LoaderScene = cc.Scene.extend({
         var label = self._label = cc.LabelTTF.create("Loading... 0%\n" + "毕业季，招聘季还远么？\n让我们跟着毕业狗跳，\n看看开学要做哪些准备吧！！！", "Arial", fontSize);
         var winsize = cc.director.getWinSize();
 
-        var centerPos = cc.p(winsize.width / 2, winsize.height / 2 - 130);
+        var centerPos = cc.p(winsize.width / 2, winsize.height / 2 - 140);
         label.setPosition(centerPos);
         label.textAlign = 1;
         label.fontSize = 25;
@@ -75,7 +75,7 @@ cc.LoaderScene = cc.Scene.extend({
         var logo = self._logo = cc.Sprite.create(texture2d);
         logo.setScale(cc.contentScaleFactor());
         logo.x = centerPos.x;
-        logo.y = centerPos.y;
+        logo.y = centerPos.y + 50;
         self._bgLayer.addChild(logo, 10);
     },
 
