@@ -15,9 +15,9 @@ var MenuLayer = cc.Layer.extend({
 
         var centerpos = cc.p(size.width / 2, size.height / 2);
 
-//        var blackBG = cc.Sprite.create(cc.color(205,205,205));
-//        blackBG.setPosition(centerpos);
-//        this.addChild(blackBG);
+        var loadBG = cc.Sprite.create(res.Load_png);
+        loadBG.setPosition(centerpos);
+        this.addChild(loadBG);
 
         this.startBtn = cc.MenuItemSprite.create(
             cc.Sprite.create(res.StartBtn_png), // normal state image
@@ -25,7 +25,7 @@ var MenuLayer = cc.Layer.extend({
             this.onPlay, this);
 //
         var menu = cc.Menu.create(this.startBtn);
-        menu.setPosition(centerpos);
+        menu.setPosition(cc.p(330, 500));
         this.addChild(menu);
 
         return true;

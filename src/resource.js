@@ -28,7 +28,8 @@ var res = {
     SPK3_png : "res/spark/spark3.png",
     SPK4_png : "res/spark/spark4.png",
     Life_png : "res/life.png",
-    Angel_png : "res/angel.png"
+    Angel_png : "res/angel.png",
+    Load_png : "res/loading.png",
 };
 
 var g_resources = [
@@ -62,7 +63,8 @@ var g_resources = [
     res.SPK3_png,
     res.SPK4_png,
     res.Life_png,
-    res.Angel_png
+    res.Angel_png,
+    res.Load_png
 
     //plist
 
