@@ -53,8 +53,6 @@ var CloudLayer = cc.Layer.extend({
 
     genCloud:function(){
 
-//        cc.log("gen_cloud");
-
         this.cloudSetting = new Array(this.cloudLimit);
         this.toolSetting = new Array(this.cloudLimit);
         this.decSetting = new Array(this.cloudLimit);
@@ -269,8 +267,6 @@ var CloudLayer = cc.Layer.extend({
                 var item = new CloudItem();
                 this.cloudArray.push(item);
                 this.cloudArray[this.numOfcloud - (num - i)].display = this.cloudSetting[this.pointToSetting];
-                cc.log("cloud setting = "+this.cloudSetting[this.pointToSetting]);
-                cc.log("pointToSetting : "+this.pointToSetting);
                 this.addChild(this.cloudArray[this.numOfcloud - (num - i)].createCloud(this.startPos, this.distance * (this.upperBound - (num - i)), this.numOfcloud + i));
 
                 var tool = new ToolItem();

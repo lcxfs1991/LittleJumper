@@ -58,8 +58,8 @@ var GameResultLayer = cc.Layer.extend({
         if (gameJudge == "Success"){
 
             this.Background = cc.Sprite.create(res.WINBG_png);
-            this.Background.setPosition(cc.p(winsize / 2, winsize / 2));
-            this.Background.zIndex = -10;
+            this.Background.setPosition(cc.p(centerPos));
+            this.Background.zIndex = -1;
             this.addChild(this.Background);
 
             var resultSec = Math.round(this.secondResult * 100)/100;
@@ -67,17 +67,12 @@ var GameResultLayer = cc.Layer.extend({
             document.title = Msg;
             var descContent = Msg;
             var shareTitle = Msg;
-
-//            var TimeResult = cc.LabelTTF.create(, "Arial", 32);
-//            TimeResult.setColor(cc.color(255, 255, 255));
-//            TimeResult.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 160));
-//            this.addChild(TimeResult);
         }
         else{
 
             this.Background = cc.Sprite.create(res.LOSE_png);
-            this.Background.setPosition(cc.p(winsize / 2, winsize / 2));
-            this.Background.zIndex = -10;
+            this.Background.setPosition(centerPos);
+            this.Background.zIndex = -1;
             this.addChild(this.Background);
 
             document.title = "是毕业狗的都快来玩!";
