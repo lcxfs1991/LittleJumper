@@ -111,7 +111,7 @@ var GameResultLayer = cc.Layer.extend({
 
     onSuccess:function(){
 
-        this.Background = cc.Sprite.create(res.JumpBG_png);
+        this.Background = cc.Sprite.create(res.JumpBG_png); 
         this.Background.setPosition(cc.p(this.centerPos));
         this.addChild(this.Background);
 
