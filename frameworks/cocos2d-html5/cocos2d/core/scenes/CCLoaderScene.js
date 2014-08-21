@@ -54,7 +54,7 @@ cc.LoaderScene = cc.Scene.extend({
             lblHeight = -logoHeight / 2 - 10;
         }
         //loading percent
-        var label = self._label = cc.LabelTTF.create("Loading... 0%\n" + "毕业季，招聘季还远么？\n让我们跟着毕业狗跳，\n看看开学要做哪些准备吧！！！", "Arial", fontSize);
+        var label = self._label = cc.LabelTTF.create("Loading... 0%\n" + "毕业季，招聘季还远么？\n让我们跟着跳，\n看看开学要做哪些准备吧！！！", "Arial", fontSize);
         var winsize = cc.director.getWinSize();
 
         var centerPos = cc.p(winsize.width / 2, winsize.height / 2 - 140);
@@ -88,7 +88,7 @@ cc.LoaderScene = cc.Scene.extend({
 
     onExit: function () {
         cc.Node.prototype.onExit.call(this);
-        var tmpStr = "Loading... 0%\n" + "毕业季，招聘季还远么？\n让我们跟着毕业狗跳，\n看看开学要做哪些准备吧！！！";
+        var tmpStr = "Loading... 0%\n" + "毕业季，招聘季还远么？\n让我们跟着跳，\n看看开学要做哪些准备吧！！！";
         this._label.setString(tmpStr);
         this._label.setFontSize(25);
     },
@@ -123,7 +123,7 @@ cc.LoaderScene = cc.Scene.extend({
         var length = self._length;
         var percent = (count / length * 100) | 0;
         percent = Math.min(percent, 100);
-        self._label.setString("Loading... " + percent + "%\n" + "毕业季，招聘季还远么？\n让我们跟着毕业狗跳，\n看看开学要做哪些准备吧！！！");
+        self._label.setString("Loading... " + percent + "%\n" + "毕业季，招聘季还远么？\n让我们跟着跳，\n看看开学要做哪些准备吧！！！");
         self._label.setFontSize(25);
         if(count >= length) self.unschedule(self._updatePercent);
     }

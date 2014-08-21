@@ -383,7 +383,7 @@ var CloudLayer = cc.Layer.extend({
                 this.addChild(tips);
 
                 //add life tips
-                var addLife = cc.LabelTTF.create("加半条命", "Helvetica", 28);
+                var addLife = cc.LabelTTF.create("加半颗心", "Helvetica", 28);
                 addLife.setColor(cc.color(240,43,79)); //red
                 addLife.setPosition(cc.p(this.decArray[this.centerIndex].getPosition().x - this.distance - 20, this.decArray[this.centerIndex].getPosition().y + 20));
 

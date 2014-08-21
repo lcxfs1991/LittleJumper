@@ -6,6 +6,9 @@ var GameResultLayer = cc.Layer.extend({
 
     secondResult: 0,
     status:null,
+    winsize:null,
+    centerPos:null,
+    Msg:null,
 
     ctor:function (gameJudge, status) {
 
@@ -16,10 +19,57 @@ var GameResultLayer = cc.Layer.extend({
     },
     init:function (gameJudge, result) {
         this._super();
-//        cc.log("gameJudge = "+gameJudge);
-        var winsize = cc.director.getWinSize();
+        this.winsize = cc.director.getWinSize();
 
-        var centerPos = cc.p(winsize.width / 2, winsize.height / 2);
+        this.centerPos = cc.p(this.winsize.width / 2, this.winsize.height / 2);
+
+        //success message
+        if (gameJudge == "Success"){
+
+            this.BGBtn = cc.MenuItemSprite.create(
+                cc.Sprite.create(res.WINBG_png), // normal state image
+                cc.Sprite.create(res.WINBG_png), //select state image
+                this.onSuccess, this);
+
+            var menuBG = cc.Menu.create(this.BGBtn);
+            menuBG.setPosition(this.centerPos);
+            this.addChild(menuBG);
+
+//            document.title = "是毕业生的都快来玩!";
+//            var descContent = "是毕业生的都快来玩!";
+//            var shareTitle = '是毕业生的都快来玩!';
+//            this.Msg = "求职季不容易，咱们再来一次!";
+
+//            var resultSec = Math.round(this.secondResult * 100)/100;
+//            this.Msg = "你以 "+resultSec+" 秒击败"+this.Beat(resultSec)+"%的对手\n赶紧分享给小伙伴，\n让他们也来跳跳跳吧！";
+//            document.title = this.Msg;
+//            var descContent = this.Msg;
+//            var shareTitle = this.Msg;
+        }
+        else{
+
+            this.Background = cc.Sprite.create(res.LOSE_png);
+            this.Background.setPosition(this.centerPos);
+            this.addChild(this.Background);
+
+            document.title = "是毕业生的都快来玩!";
+            var descContent = "是毕业生的都快来玩!";
+            var shareTitle = '是毕业生的都快来玩!';
+            this.Msg = "求职季不容易，咱们再来一次!";
+
+            this.creatBtn();
+        }
+
+
+
+        var imgUrl = 'http://leehey.org/publish/res/runner.png';
+        var lineLink = 'http://leehey.org/publish';
+
+        shareTimeline(imgUrl, lineLink, descContent, shareTitle);
+
+    },
+
+    creatBtn:function(){
 
         //restart button
         this.RestartBtn = cc.MenuItemSprite.create(
@@ -28,7 +78,7 @@ var GameResultLayer = cc.Layer.extend({
             this.onRestart, this);
 
         var menu = cc.Menu.create(this.RestartBtn);
-        menu.setPosition(centerPos);
+        menu.setPosition(this.centerPos);
         this.addChild(menu);
 
         //share button
@@ -38,7 +88,7 @@ var GameResultLayer = cc.Layer.extend({
             this.onShare, this);
 
         var share = cc.Menu.create(this.ShareBtn);
-        share.setPosition(cc.p(winsize.width / 2, winsize.height / 2 - 100));
+        share.setPosition(cc.p(this.winsize.width / 2, this.winsize.height / 2 - 100));
         this.addChild(share);
 
         //follow button
@@ -48,54 +98,35 @@ var GameResultLayer = cc.Layer.extend({
             this.onFollow, this);
 
         var follow = cc.Menu.create(this.FollowBtn);
-        follow.setPosition(cc.p(winsize.width / 2, winsize.height / 2 - 200));
-        follow.zIndex = 100;
+        follow.setPosition(cc.p(this.winsize.width / 2, this.winsize.height / 2 - 200));
         this.addChild(follow);
 
-
-
-        //success message
-        if (gameJudge == "Success"){
-
-            this.Background = cc.Sprite.create(res.WINBG_png);
-            this.Background.setPosition(cc.p(centerPos));
-            this.Background.zIndex = -1;
-            this.addChild(this.Background);
-
-            var resultSec = Math.round(this.secondResult * 100)/100;
-            var Msg = "你以 "+resultSec+" 秒击败"+this.Beat(resultSec)+"%的对手\n赶紧分享给小伙伴，\n让他们也来跳跳跳吧！";
-            document.title = Msg;
-            var descContent = Msg;
-            var shareTitle = Msg;
-        }
-        else{
-
-            this.Background = cc.Sprite.create(res.LOSE_png);
-            this.Background.setPosition(centerPos);
-            this.Background.zIndex = -1;
-            this.addChild(this.Background);
-
-            document.title = "是毕业狗的都快来玩!";
-            var descContent = "是毕业狗的都快来玩!";
-            var shareTitle = '是毕业狗的都快来玩!';
-            var Msg = "毕业狗，再苦再累也有收获!";
-        }
-
-        var MsgLabel = cc.LabelTTF.create(Msg, "Arial", 28);
+        var MsgLabel = cc.LabelTTF.create(this.Msg, "Arial", 28);
         MsgLabel.setColor(cc.color(0, 0, 0));
-        MsgLabel.setPosition(cc.p(winsize.width / 2, winsize.height / 2 + 140));
+        MsgLabel.setPosition(cc.p(this.winsize.width / 2, this.winsize.height / 2 + 140));
         this.addChild(MsgLabel);
 
-        var imgUrl = 'http://leehey.org/publish/res/runner.png';
-        var lineLink = 'http://leehey.org/publish';
 
-        shareTimeline(imgUrl, lineLink, descContent, shareTitle);
+    },
 
+    onSuccess:function(){
+
+        this.Background = cc.Sprite.create(res.WINBG_png1);
+        this.Background.setPosition(cc.p(this.centerPos));
+        this.addChild(this.Background);
+
+        var resultSec = Math.round(this.secondResult * 100)/100;
+        this.Msg = "你以 "+resultSec+" 秒击败"+this.Beat(resultSec)+"%的对手\n赶紧分享给小伙伴，\n让他们也来跳跳跳吧！";
+        document.title = this.Msg;
+        var descContent = this.Msg;
+        var shareTitle = this.Msg;
+
+        this.creatBtn();
     },
 
     onRestart:function(){
 
-        document.title = "毕业狗跳跳跳!";
+        document.title = "毕业季跳跳跳!";
         cc.director.runScene(new PlayScene());
     },
 
