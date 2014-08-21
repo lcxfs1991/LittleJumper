@@ -26,14 +26,7 @@ var GameResultLayer = cc.Layer.extend({
         //success message
         if (gameJudge == "Success"){
 
-            this.BGBtn = cc.MenuItemSprite.create(
-                cc.Sprite.create(res.WINBG_png), // normal state image
-                cc.Sprite.create(res.WINBG_png), //select state image
-                this.onSuccess, this);
-
-            var menuBG = cc.Menu.create(this.BGBtn);
-            menuBG.setPosition(this.centerPos);
-            this.addChild(menuBG);
+            this.onSuccess();
 
 //            document.title = "是毕业生的都快来玩!";
 //            var descContent = "是毕业生的都快来玩!";
@@ -78,7 +71,8 @@ var GameResultLayer = cc.Layer.extend({
             this.onRestart, this);
 
         var menu = cc.Menu.create(this.RestartBtn);
-        menu.setPosition(this.centerPos);
+        menu.setPosition(this.winsize.width / 2 - 40, this.winsize.height / 2 - 40);
+        menu.setScale(0.8);
         this.addChild(menu);
 
         //share button
@@ -88,7 +82,8 @@ var GameResultLayer = cc.Layer.extend({
             this.onShare, this);
 
         var share = cc.Menu.create(this.ShareBtn);
-        share.setPosition(cc.p(this.winsize.width / 2, this.winsize.height / 2 - 100));
+        share.setPosition(cc.p(this.winsize.width / 2 - 40, this.winsize.height / 2 - 100));
+        share.setScale(0.8);
         this.addChild(share);
 
         //follow button
@@ -98,12 +93,13 @@ var GameResultLayer = cc.Layer.extend({
             this.onFollow, this);
 
         var follow = cc.Menu.create(this.FollowBtn);
-        follow.setPosition(cc.p(this.winsize.width / 2, this.winsize.height / 2 - 200));
+        follow.setPosition(cc.p(this.winsize.width / 2 - 40, this.winsize.height / 2 - 160));
+        follow.setScale(0.8);
         this.addChild(follow);
 
-        var MsgLabel = cc.LabelTTF.create(this.Msg, "Arial", 28);
+        var MsgLabel = cc.LabelTTF.create(this.Msg, "Arial", 24);
         MsgLabel.setColor(cc.color(0, 0, 0));
-        MsgLabel.setPosition(cc.p(this.winsize.width / 2, this.winsize.height / 2 + 140));
+        MsgLabel.setPosition(cc.p(this.winsize.width / 2, this.winsize.height / 2 + 100));
         this.addChild(MsgLabel);
 
 
@@ -111,7 +107,7 @@ var GameResultLayer = cc.Layer.extend({
 
     onSuccess:function(){
 
-        this.Background = cc.Sprite.create(res.JumpBG_png); 
+        this.Background = cc.Sprite.create(res.WINBG_png);
         this.Background.setPosition(cc.p(this.centerPos));
         this.addChild(this.Background);
 

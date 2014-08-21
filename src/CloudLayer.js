@@ -330,7 +330,7 @@ var CloudLayer = cc.Layer.extend({
                 this.toolArray[this.centerIndex].runAction(fadeAni);
 
                 var cutSecond = cc.LabelTTF.create("减2秒", "Helvetica", 28);
-                cutSecond.setColor(cc.color(240,43,79)); //red
+                cutSecond.setColor(cc.color(51,01,14)); //red
                 cutSecond.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x - this.distance - 20, this.toolArray[this.centerIndex].getPosition().y + 20));
 
                 var shrinkAni = cc.sequence(
@@ -357,7 +357,7 @@ var CloudLayer = cc.Layer.extend({
                 var winSize = cc.director.getWinSize();
 
                 var tips = cc.LabelTTF.create(this.decArray[index].msg, "Helvetica", 23);
-                tips.setColor(cc.color(240,43,79)); //red
+                tips.setColor(cc.color(51,01,14)); //red
                 tips.zIndex = 100;
                 tips.setPosition(cc.p(winSize.width / 2, this.decArray[index].getPosition().y + 40));
 
@@ -384,7 +384,7 @@ var CloudLayer = cc.Layer.extend({
 
                 //add life tips
                 var addLife = cc.LabelTTF.create("加半颗心", "Helvetica", 28);
-                addLife.setColor(cc.color(240,43,79)); //red
+                addLife.setColor(cc.color(51,01,14)); //red
                 addLife.setPosition(cc.p(this.decArray[this.centerIndex].getPosition().x - this.distance - 20, this.decArray[this.centerIndex].getPosition().y + 20));
 
                 var shrinkAni1 = cc.sequence(

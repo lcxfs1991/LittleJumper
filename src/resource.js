@@ -1,5 +1,5 @@
 var res = {
-    JumpBG_png : "res/Bg.png",
+    JumpBG_png : "res/Bg.jpg",
     StartBtn_png : "res/start.png",
     ReStartBtn_png : "res/restart.png",
     Runner_png : "res/runner.png",
@@ -20,8 +20,8 @@ var res = {
     CV_png : "res/decorations/cv.png",
     Suit_png : "res/decorations/suit.png",
     PG_png: "res/decorations/pg.png",
-    LOSE_png : "res/lose.png",
-    WINBG_png : "res/winBG.png",
+    LOSE_png : "res/lose.jpg",
+    WINBG_png : "res/winBG.jpg",
     FL_png : "res/follow.png",
     SPK1_png : "res/spark/spark1.png",
     SPK2_png : "res/spark/spark2.png",
@@ -29,7 +29,7 @@ var res = {
     SPK4_png : "res/spark/spark4.png",
     Life_png : "res/life.png",
     Angel_png : "res/angel.png",
-    Load_png : "res/loading.png",
+    Load_png : "res/loading.jpg"
 };
 
 var g_resources = [
