@@ -97,6 +97,19 @@ var GameResultLayer = cc.Layer.extend({
         follow.setScale(0.8);
         this.addChild(follow);
 
+        //reward button
+
+        this.RewardBtn = cc.MenuItemSprite.create(
+            cc.Sprite.create(res.Reward_png),
+            cc.Sprite.create(res.Reward_png),
+            this.onReward, this);
+
+        var reward = cc.Menu.create(this.RewardBtn);
+        reward.setPosition(cc.p(this.winsize.width / 2 - 40, this.winsize.height / 2 - 220));
+        reward.setScale(0.8);
+        this.addChild(reward);
+
+
         var MsgLabel = cc.LabelTTF.create(this.Msg, "Arial", 24);
         MsgLabel.setColor(cc.color(0, 0, 0));
         MsgLabel.setPosition(cc.p(this.winsize.width / 2, this.winsize.height / 2 + 100));
@@ -167,6 +180,10 @@ var GameResultLayer = cc.Layer.extend({
 
     onFollow: function(){
         window.location = "http://mp.weixin.qq.com/s?__biz=MjM5MTA0NzU1NQ==&mid=200591326&idx=1&sn=0e3919ce9ed1c8c50a0eacf214326b02&3rd=MzA3MDU4NTYzMw==&scene=6#rd";
+    },
+
+    onReward: function(){
+        window.location = "http://www.pgrecruiting.com/20140827/Default.aspx?go=guaguaka";
     },
 
     Beat: function(time){

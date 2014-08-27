@@ -564,7 +564,7 @@ var DecoItem = cc.Sprite.extend({
         }
         else if (this.order == 9){
             this.initWithFile(res.PG_png);
-            this.msg = "9.10宝洁2014校园招聘正式开始, \n我已经准备好啦!";
+            this.msg = "9.9宝洁2014校园招聘正式开始, \n我已经准备好啦!";
         }
 
         this.attr({
