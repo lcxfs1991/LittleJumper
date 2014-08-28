@@ -38,6 +38,18 @@ var GameResultLayer = cc.Layer.extend({
 //            document.title = this.Msg;
 //            var descContent = this.Msg;
 //            var shareTitle = this.Msg;
+
+            //reward button
+
+            this.RewardBtn = cc.MenuItemSprite.create(
+            cc.Sprite.create(res.Reward_png),
+            cc.Sprite.create(res.Reward_png),
+            this.onReward, this);
+
+            var reward = cc.Menu.create(this.RewardBtn);
+            reward.setPosition(cc.p(this.winsize.width / 2 - 40, this.winsize.height / 2 - 220));
+            reward.setScale(0.8);
+            this.addChild(reward);
         }
         else{
 
@@ -97,17 +109,7 @@ var GameResultLayer = cc.Layer.extend({
         follow.setScale(0.8);
         this.addChild(follow);
 
-        //reward button
 
-        this.RewardBtn = cc.MenuItemSprite.create(
-            cc.Sprite.create(res.Reward_png),
-            cc.Sprite.create(res.Reward_png),
-            this.onReward, this);
-
-        var reward = cc.Menu.create(this.RewardBtn);
-        reward.setPosition(cc.p(this.winsize.width / 2 - 40, this.winsize.height / 2 - 220));
-        reward.setScale(0.8);
-        this.addChild(reward);
 
 
         var MsgLabel = cc.LabelTTF.create(this.Msg, "Arial", 24);
