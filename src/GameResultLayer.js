@@ -244,19 +244,3 @@ var GameResultLayer = cc.Layer.extend({
 
     }
 });
-
-//GameResultLayer.create = function () {
-//    var sg = new GameResultLayer();
-//
-//    if (sg && sg.init()) {
-//        return sg;
-//    }
-//    return null;
-//};
-//
-//GameResultLayer.scene = function () {
-//    var scene = cc.Scene.create();
-//    var layer = GameResultLayer.create();
-//    scene.addChild(layer);
-//    return scene;
-//};

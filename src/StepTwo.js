@@ -50,7 +50,7 @@ var StepTwo = cc.Sprite.extend({
 
                 //Check the click area
                 if (cc.rectContainsPoint(rect, locationInNode)) {
-                    cc.log("sprite began... x = " + locationInNode.x + ", y = " + locationInNode.y);
+//                    cc.log("sprite began... x = " + locationInNode.x + ", y = " + locationInNode.y);
                     target.opacity = 180;
 
                     target.playerJump();
@@ -70,7 +70,7 @@ var StepTwo = cc.Sprite.extend({
             //Process the touch end event
             onTouchEnded: function (touch, event) {
                 var target = event.getCurrentTarget();
-                cc.log("sprite onTouchesEnded.. ");
+//                cc.log("sprite onTouchesEnded.. ");
                 target.setOpacity(255);
                 //Reset zOrder and the display sequence will change
 //                if (target == sprite2) {

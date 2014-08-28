@@ -54,7 +54,7 @@ var StepThree = cc.Sprite.extend({
 
                 //Check the click area
                 if (cc.rectContainsPoint(rect, locationInNode)) {
-                    cc.log("sprite began... x = " + locationInNode.x + ", y = " + locationInNode.y);
+//                    cc.log("sprite began... x = " + locationInNode.x + ", y = " + locationInNode.y);
                     target.opacity = 180;
 
                     target.playerJump();
@@ -73,7 +73,7 @@ var StepThree = cc.Sprite.extend({
             //Process the touch end event
             onTouchEnded: function (touch, event) {
                 var target = event.getCurrentTarget();
-                cc.log("sprite onTouchesEnded.. ");
+//                cc.log("sprite onTouchesEnded.. ");
                 target.setOpacity(255);
                 //Reset zOrder and the display sequence will change
 //                if (target == sprite2) {
@@ -164,7 +164,7 @@ var StepThree = cc.Sprite.extend({
         this.player.spriteRunner.setScale(0.5);
         this.player.addChild(this.player.spriteRunner);
 
-        cc.log("resume");
+//        cc.log("resume");
         cc.eventManager.addListener(this.listener1, this);
         cc.eventManager.addListener(this.parentN.stepTwo.listener1, this.parentN.stepTwo);
         this.player.addAngel();
