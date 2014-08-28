@@ -33,8 +33,8 @@ var StepThree = cc.Sprite.extend({
         this.initWithFile(res.Step3_png);
         this.attr({
             x: 340,
-            y: 50,
-            scale: 0.5
+            y: 50
+//            scale: 0.5
         });
 
         //Create a "one by one" touch event listener (processes one touch at a time)
@@ -161,12 +161,11 @@ var StepThree = cc.Sprite.extend({
 
         this.player.removeChild(this.player.spriteRunner);
         this.player.spriteRunner.setPosition(cc.p(155, 415));
-        this.player.spriteRunner.setScale(0.5);
         this.player.addChild(this.player.spriteRunner);
-
-//        cc.log("resume");
-        cc.eventManager.addListener(this.listener1, this);
-        cc.eventManager.addListener(this.parentN.stepTwo.listener1, this.parentN.stepTwo);
+        if ( this.gameJudge != "Success"){
+            cc.eventManager.addListener(this.listener1, this);
+            cc.eventManager.addListener(this.parentN.stepTwo.listener1, this.parentN.stepTwo);
+        }
         this.player.addAngel();
 
     }

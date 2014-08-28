@@ -41,15 +41,13 @@ var PlayScene = cc.Scene.extend({
         this.addChild(this.cloud);
 
         //add step two control
-        this.stepTwo = new StepTwo(this.player, this.cloud, this.status);
+        this.stepTwo = new StepTab(this.player, this.cloud, this.status, res.Step2_png, 1, this);
         this.addChild(this.stepTwo);
 
         //add step three control
-        this.stepThree = new StepThree(this.player, this.cloud, this.status);
+        this.stepThree = new StepTab(this.player, this.cloud, this.status, res.Step3_png, 2, this);
         this.addChild(this.stepThree);
 
-        this.stepTwo.getParent(this);
-        this.stepThree.getParent(this);
 
     }
 });

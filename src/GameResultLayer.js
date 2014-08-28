@@ -47,8 +47,8 @@ var GameResultLayer = cc.Layer.extend({
             this.onReward, this);
 
             var reward = cc.Menu.create(this.RewardBtn);
-            reward.setPosition(cc.p(this.winsize.width / 2 - 40, this.winsize.height / 2 - 220));
-            reward.setScale(0.8);
+            reward.setPosition(cc.p(this.winsize.width / 2, this.winsize.height / 2 - 160));
+//            reward.setScale(0.8);
             this.addChild(reward);
         }
         else{
@@ -83,8 +83,8 @@ var GameResultLayer = cc.Layer.extend({
             this.onRestart, this);
 
         var menu = cc.Menu.create(this.RestartBtn);
-        menu.setPosition(this.winsize.width / 2 - 40, this.winsize.height / 2 - 40);
-        menu.setScale(0.8);
+        menu.setPosition(this.winsize.width / 2, this.winsize.height / 2 + 20);
+//        menu.setScale(0.8);
         this.addChild(menu);
 
         //share button
@@ -94,8 +94,8 @@ var GameResultLayer = cc.Layer.extend({
             this.onShare, this);
 
         var share = cc.Menu.create(this.ShareBtn);
-        share.setPosition(cc.p(this.winsize.width / 2 - 40, this.winsize.height / 2 - 100));
-        share.setScale(0.8);
+        share.setPosition(cc.p(this.winsize.width / 2, this.winsize.height / 2 - 40));
+//        share.setScale(0.8);
         this.addChild(share);
 
         //follow button
@@ -105,8 +105,8 @@ var GameResultLayer = cc.Layer.extend({
             this.onFollow, this);
 
         var follow = cc.Menu.create(this.FollowBtn);
-        follow.setPosition(cc.p(this.winsize.width / 2 - 40, this.winsize.height / 2 - 160));
-        follow.setScale(0.8);
+        follow.setPosition(cc.p(this.winsize.width / 2, this.winsize.height / 2 - 100));
+//        follow.setScale(0.8);
         this.addChild(follow);
 
 

@@ -151,6 +151,7 @@
                 <file name="src/StepThree.js"/>
                 <file name="src/GameResultLayer.js"/>
                 <file name="src/Spark.js"/>
+                <file name="src/StepTab.js"/>
                 <file name="main.js"/>
 
             </sources>

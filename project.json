@@ -21,6 +21,7 @@
         "src/StepTwo.js",
         "src/StepThree.js",
         "src/GameResultLayer.js",
-        "src/Spark.js"
+        "src/Spark.js",
+        "src/StepTab.js"
     ]
 }

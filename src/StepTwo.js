@@ -29,8 +29,8 @@ var StepTwo = cc.Sprite.extend({
         this.initWithFile(res.Step2_png);
         this.attr({
             x: 60,
-            y: 50,
-            scale: 0.5
+            y: 50
+//            scale: 0.5
         });
 
         //Create a "one by one" touch event listener (processes one touch at a time)
@@ -119,14 +119,10 @@ var StepTwo = cc.Sprite.extend({
 
             cc.eventManager.removeAllListeners();
             this.status.stopScheduler();
-//            cc.log(this.gameJudge);
             this.runAction(cc.Sequence.create(
                 cc.DelayTime.create(4),
                 cc.CallFunc.create(this.onGameOver, this)));
         }
-
-//        cc.log("current step: "+(currentStep + this.centerIndex));
-//        cc.log("current cloud: "+this.cloud.cloudArray[currentStep + 7].display);
 
         if (this.gameJudge == "NoCloud" || this.gameJudge == "Explode"){
 
@@ -161,11 +157,13 @@ var StepTwo = cc.Sprite.extend({
 
         this.player.removeChild(this.player.spriteRunner);
         this.player.spriteRunner.setPosition(cc.p(155, 415));
-        this.player.spriteRunner.setScale(0.5);
         this.player.addChild(this.player.spriteRunner);
 
-        cc.eventManager.addListener(this.listener1, this);
-        cc.eventManager.addListener(this.parentN.stepThree.listener1, this.parentN.stepThree);
+        if ( this.gameJudge != "Success"){
+            cc.eventManager.addListener(this.listener1, this);
+            cc.eventManager.addListener(this.parentN.stepThree.listener1, this.parentN.stepThree);
+        }
+
         this.player.addAngel();
 
     }
