@@ -18,8 +18,6 @@
         "src/PlayScene.js",
         "src/StatusLayer.js",
         "src/CloudLayer.js",
-        "src/StepTwo.js",
-        "src/StepThree.js",
         "src/GameResultLayer.js",
         "src/Spark.js",
         "src/StepTab.js"
