@@ -181,7 +181,7 @@ var GameResultLayer = cc.Layer.extend({
     },
 
     onFollow: function(){
-        window.location = "http://mp.weixin.qq.com/s?__biz=MjM5MTA0NzU1NQ==&mid=200591326&idx=1&sn=0e3919ce9ed1c8c50a0eacf214326b02&3rd=MzA3MDU4NTYzMw==&scene=6#rd";
+        window.location = "http://mp.weixin.qq.com/s?__biz=MjM5MTA0NzU1NQ==&mid=200749859&idx=1&sn=41893ee9ad1221ec9a79d7a9c3e49f2a&scene=1#rd";
     },
 
     onReward: function(){

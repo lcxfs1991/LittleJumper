@@ -22,8 +22,8 @@ var CloudLayer = cc.Layer.extend({
     pointToSetting:17,
     toolArray:null,
     centerIndex: 2,
-    decSetting:null,
-    decArray:null,
+//    decSetting:null,
+//    decArray:null,
     status:null,
 
     ctor:function (status) {
@@ -45,7 +45,7 @@ var CloudLayer = cc.Layer.extend({
 
         this.cloudArray = new Array();
         this.toolArray = new Array();
-        this.decArray = new Array();
+//        this.decArray = new Array();
 
         this.initStage();
 
@@ -55,7 +55,7 @@ var CloudLayer = cc.Layer.extend({
 
         this.cloudSetting = new Array(this.cloudLimit);
         this.toolSetting = new Array(this.cloudLimit);
-        this.decSetting = new Array(this.cloudLimit);
+//        this.decSetting = new Array(this.cloudLimit);
 
         //initialization clouds
         for (var i = 0; i < this.cloudLimit + this.cloudHidden; i++ ){
@@ -100,14 +100,14 @@ var CloudLayer = cc.Layer.extend({
 
                 if (loc != this.centerIndex && this.cloudSetting[loc] == 1)
                 {
-                    this.toolSetting[loc] = 2;
+                    this.toolSetting[loc] = 11;
                     break;
                 }
             }
         }
 
         //destination tab
-        this.toolSetting[this.cloudLimit - 1] = 3;
+        this.toolSetting[this.cloudLimit - 1] = 12;
 
         for (var i = 0; i < this.cloudLimit / 30; i++){
 
@@ -123,7 +123,7 @@ var CloudLayer = cc.Layer.extend({
                     && this.cloudSetting[loc - 1] ==1 && this.cloudSetting[loc + 1] != undefined
                     && this.cloudSetting[loc + 1] == 1){
 
-                    this.toolSetting[loc] = 1;
+                    this.toolSetting[loc] = 10;
                     break;
                 }
 
@@ -133,11 +133,24 @@ var CloudLayer = cc.Layer.extend({
         }
 
         //initialization of decorations
-        for (var i = 0; i < this.cloudLimit; i++){
-            this.decSetting[i] = 0;
-        }
+//        for (var i = 0; i < this.cloudLimit; i++){
+//            this.decSetting[i] = 0;
+//        }
 
         //random decorations
+//        for (var i = 1; i <= 8; i++){
+//
+//            var index = i * 10 - 1;
+//
+//            for (var j = index; j >= index - 9; j--){
+//
+//                if (this.cloudSetting[j] == 1 && this.toolSetting[j] == 0){
+//                    this.decSetting[j] = i;
+//                    break;
+//                }
+//            }
+//        }
+
         for (var i = 1; i <= 8; i++){
 
             var index = i * 10 - 1;
@@ -145,13 +158,16 @@ var CloudLayer = cc.Layer.extend({
             for (var j = index; j >= index - 9; j--){
 
                 if (this.cloudSetting[j] == 1 && this.toolSetting[j] == 0){
-                    this.decSetting[j] = i;
+                    this.toolSetting[j] = i;
                     break;
                 }
             }
         }
 
-        this.decSetting[this.cloudLimit - 1] = 9;
+
+//        this.decSetting[this.cloudLimit - 1] = 9;
+
+        this.toolSetting[this.cloudLimit - 1] = 9;
 
     },
 
@@ -168,9 +184,9 @@ var CloudLayer = cc.Layer.extend({
             tool.toolType = this.toolSetting[i];
             this.toolArray.push(tool);
 
-            var deco = new DecoItem();
-            deco.order = this.decSetting[i];
-            this.decArray.push(deco);
+//            var deco = new DecoItem();
+//            deco.order = this.decSetting[i];
+//            this.decArray.push(deco);
         }
 
         for (var i = 0; i < this.numOfcloud; i++){
@@ -181,9 +197,9 @@ var CloudLayer = cc.Layer.extend({
             this.addChild(this.toolArray[i].createTool(this.startPos, this.distance * i));
         }
 
-        for (var i = 0; i < this.numOfcloud; i++){
-            this.addChild(this.decArray[i].createDec(this.startPos, this.distance * i));
-        }
+//        for (var i = 0; i < this.numOfcloud; i++){
+//            this.addChild(this.decArray[i].createDec(this.startPos, this.distance * i));
+//        }
 
 
     },
@@ -192,10 +208,10 @@ var CloudLayer = cc.Layer.extend({
 
         var removeArray = [];
         var removeTool = [];
-        var removeDec = [];
+//        var removeDec = [];
         var index = -1;
         var index1 = -1
-        var index2 = -1;
+//        var index2 = -1;
 
         //move cloud
         for (var i = 0; i < this.numOfcloud; i++){
@@ -208,9 +224,9 @@ var CloudLayer = cc.Layer.extend({
                 this.toolArray[i].moveTool(num);
             }
 
-            if (this.decArray[i] != undefined){
-                this.decArray[i].moveDec(num);
-            }
+//            if (this.decArray[i] != undefined){
+//                this.decArray[i].moveDec(num);
+//            }
 
         }
 
@@ -219,7 +235,7 @@ var CloudLayer = cc.Layer.extend({
 
             removeArray.push(this.cloudArray[i]);
             removeTool.push(this.toolArray[i]);
-            removeDec.push(this.decArray[i]);
+//            removeDec.push(this.decArray[i]);
         }
 
         for (i in removeArray){
@@ -248,18 +264,18 @@ var CloudLayer = cc.Layer.extend({
             this.removeChild(targetAway1);
         }
 
-        for (k in removeDec){
-
-            var targetAway2 = removeDec[k];
-
-            var index2 = this.decArray.indexOf(targetAway2);
-
-            if (index2 > -1){
-                this.decArray.splice(index2, 1);
-            }
-
-            this.removeChild(targetAway2);
-        }
+//        for (k in removeDec){
+//
+//            var targetAway2 = removeDec[k];
+//
+//            var index2 = this.decArray.indexOf(targetAway2);
+//
+//            if (index2 > -1){
+//                this.decArray.splice(index2, 1);
+//            }
+//
+//            this.removeChild(targetAway2);
+//        }
 
         //add cloud
         for (var i = 0; i < num; i++){
@@ -274,10 +290,10 @@ var CloudLayer = cc.Layer.extend({
                 this.toolArray[this.numOfcloud - (num - i)].toolType = this.toolSetting[this.pointToSetting];
                 this.addChild(this.toolArray[this.numOfcloud - (num - i)].createTool(this.startPos, this.distance * (this.upperBound - (num - i))));
 
-                var deco = new DecoItem();
-                this.decArray.push(deco);
-                this.decArray[this.numOfcloud - (num - i)].order = this.decSetting[this.pointToSetting];
-                this.addChild(this.decArray[this.numOfcloud - (num - i)].createDec(this.startPos, this.distance * (this.upperBound - (num - i))));
+//                var deco = new DecoItem();
+//                this.decArray.push(deco);
+//                this.decArray[this.numOfcloud - (num - i)].order = this.decSetting[this.pointToSetting];
+//                this.addChild(this.decArray[this.numOfcloud - (num - i)].createDec(this.startPos, this.distance * (this.upperBound - (num - i))));
 
                 this.pointToSetting++;
             }
@@ -293,7 +309,7 @@ var CloudLayer = cc.Layer.extend({
 
             var fadeAni = cc.fadeOut(0.1);
 
-            if (this.toolArray[this.centerIndex].toolType == 1){
+            if (this.toolArray[this.centerIndex].toolType == 10){
                 this.toolArray[this.centerIndex].runAction(fadeAni);
 
                 var explode = cc.Sprite.create(res.Explosion_png);
@@ -326,7 +342,7 @@ var CloudLayer = cc.Layer.extend({
 
 
             }
-            else if (this.toolArray[this.centerIndex].toolType == 2){
+            else if (this.toolArray[this.centerIndex].toolType == 11){
                 this.toolArray[this.centerIndex].runAction(fadeAni);
 
                 var cutSecond = cc.LabelTTF.create("减2秒", "Helvetica", 28);
@@ -345,23 +361,23 @@ var CloudLayer = cc.Layer.extend({
 
                 return "Clock";
             }
-            else if (this.decArray[this.centerIndex].order != 0){
+            else if (this.toolArray[this.centerIndex].toolType > 0 && this.toolArray[this.centerIndex].toolType < 10){
 
                 //add life
                 this.status.updateLife(0.5);
 
                 var index = this.centerIndex;
 
-                this.decArray[index].runAction(fadeAni);
+                this.toolArray[index].runAction(fadeAni);
 
                 var winSize = cc.director.getWinSize();
 
-                var tips = cc.LabelTTF.create(this.decArray[index].msg, "Helvetica", 23);
+                var tips = cc.LabelTTF.create(this.toolArray[index].msg, "Helvetica", 23);
                 tips.setColor(cc.color(51,01,14)); //red
                 tips.zIndex = 100;
-                tips.setPosition(cc.p(winSize.width / 2, this.decArray[index].getPosition().y + 40));
+                tips.setPosition(cc.p(winSize.width / 2, this.toolArray[index].getPosition().y + 40));
 
-                if (this.decArray[index].order % 2 == 0){
+                if (this.toolArray[index].display % 2 == 0){
                     var shrinkAni = cc.sequence(
                         cc.moveBy(0.6, 0, 120),
                         cc.fadeOut(8)
@@ -385,7 +401,7 @@ var CloudLayer = cc.Layer.extend({
                 //add life tips
                 var addLife = cc.LabelTTF.create("加半颗心", "Helvetica", 28);
                 addLife.setColor(cc.color(51,01,14)); //red
-                addLife.setPosition(cc.p(this.decArray[this.centerIndex].getPosition().x - this.distance - 20, this.decArray[this.centerIndex].getPosition().y + 20));
+                addLife.setPosition(cc.p(this.toolArray[this.centerIndex].getPosition().x - this.distance - 20, this.toolArray[this.centerIndex].getPosition().y + 20));
 
                 var shrinkAni1 = cc.sequence(
                     cc.moveBy(0.6, 0, 80),
@@ -398,11 +414,11 @@ var CloudLayer = cc.Layer.extend({
                 this.addChild(addLife);
 
             }
-
-            if (this.decArray[this.centerIndex].order == 9 || this.decArray[this.centerIndex - 1].order == 9){
+            
+            if (this.toolArray[this.centerIndex].toolType == 9 || this.toolArray[this.centerIndex - 1].toolType == 9){
 
                 var index = -1;
-                if (this.decArray[this.centerIndex].order != 0 && this.decArray[this.centerIndex].order != undefined){
+                if (this.toolArray[this.centerIndex].display != 0 && this.toolArray[this.centerIndex].display != undefined){
                     index = this.centerIndex;
                 }
                 else {
@@ -471,6 +487,7 @@ var ToolItem = cc.Sprite.extend({
 
     moveDistance: 90,
     toolType: 0,
+    msg: null,
 
     ctor:function(){
 
@@ -481,16 +498,64 @@ var ToolItem = cc.Sprite.extend({
 
         if (this.toolType > 0){
 
-            if (this.toolType == 1){
+            if (this.toolType == 10){
                 this.initWithFile(res.Bomb_png);
             }
-            else if (this.toolType == 2){
+            else if (this.toolType == 11){
                 this.initWithFile(res.Clock_png);
             }
-            else if (this.toolType == 3){
+            else if (this.toolType == 12){
                 this.initWithFile(res.PG_png);
             }
+            else {
+                switch (this.toolType){
+                    case 1:
+                        this.initWithFile(res.Door_png);
+                        this.msg = "收拾一下宿舍，整整齐齐萌萌哒!";
+                        break;
 
+                    case 2:
+                        this.initWithFile(res.TimeTable_png);
+                        this.msg = " 安排好课程表，别走错教室啦>.<";
+                        break;
+
+                    case 3:
+                        this.initWithFile(res.Food_png);
+                        this.msg = "和室友唠叨唠叨，约同学吃吃饭";
+                        break;
+
+                    case 4:
+                        this.initWithFile(res.Book_png);
+                        this.msg = "逛逛图书馆，制定一份书单";
+                        break;
+
+                    case 5:
+                        this.initWithFile(res.Cert_png);
+                        this.msg = "查看各种考证信息";
+                        break;
+
+                    case 6:
+                        this.initWithFile(res.PC_png);
+                        this.msg = "上网看看各种招聘信息";
+                        break;
+
+                    case 7:
+                        this.initWithFile(res.CV_png);
+                        this.msg = "修改简历，让师兄师姐过目一下";
+                        break;
+
+                    case 8:
+                        this.initWithFile(res.Suit_png);
+                        this.msg = "买一套正装，为面试做准备";
+                        break;
+
+                    case 9:
+                        this.initWithFile(res.PG_png);
+                        this.msg = "9.9宝洁2014校园招聘正式开始, \n我已经准备好啦!";
+                        break;
+
+                }
+            }
 
             this.attr({
                 x: startPos + distance,
