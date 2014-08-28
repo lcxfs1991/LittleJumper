@@ -137,9 +137,6 @@
                 <file name="cocos2d/tilemap/CCTMXLayer.js"/>
                 <file name="cocos2d/parallax/CCParallaxNode.js"/>
                 <file name="cocos2d/audio/CCAudio.js"/>
-                <file name="cocos2d/physics/CCPhysicsSprite.js"/>
-                <file name="cocos2d/physics/CCPhysicsDebugNode.js"/>
-                <file name="external/chipmunk/chipmunk.js"/>
 
             </sources>
             <sources dir="${basedir}">
